@@ -1,12 +1,12 @@
 ---
-name: goatie-review
+name: manbun-review
 description: >
   UI review focused exclusively on first-time-user friction. Finds what
   confuses: competing CTAs, silent actions, invented patterns, decisions a
   default should make, dead ends, blaming errors. One line per finding:
   location, the friction, the fix. Use when the user says "review the ux",
   "is this confusing", "friction review", "review for first-time users",
-  or invokes /goatie-review. Complements correctness review — this one
+  or invokes /manbun-review. Complements correctness review — this one
   only hunts confusion.
 ---
 
@@ -77,6 +77,6 @@ If there is nothing to cut, say `First-time user ships. Done.` and stop.
 ## Boundaries
 
 Friction only — correctness bugs, security, and performance go to a normal
-review pass. Loading, empty, and error states are the goatie minimum, never
+review pass. Loading, empty, and error states are the manbun minimum, never
 flag them as clutter. Does not apply the fixes, only lists them.
-"stop goatie-review" or "normal mode": revert to verbose review style.
+"stop manbun-review" or "normal mode": revert to verbose review style.

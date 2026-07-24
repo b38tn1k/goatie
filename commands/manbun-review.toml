@@ -1,0 +1,2 @@
+description = "Review UI changes for first-time-user friction"
+prompt = "Run a manbun-review on {{args}} (default: the current diff). Use the manbun-review skill: one line per finding with cut/convention/default/hierarchy/silent/trap/blame tags, location, friction, smallest fix. End with net decisions/clicks saved, or 'First-time user ships. Done.'"

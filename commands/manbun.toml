@@ -1,0 +1,2 @@
+description = "Switch manbun intensity level (lite/full/ultra/off)"
+prompt = "Switch to manbun {{args}} mode. If no level specified, use full. First-time-user UX mode, before any UI: does the user need to see this at all? Does a convention users already know cover it? Can a default remove the decision? Can it be one step? One primary action per screen, every action answers back, empty states and errors teach, never trap the user. Mark deliberate UX shortcuts with a manbun: comment."

@@ -6,10 +6,10 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo 'GOATIE MODE ACTIVE — level: full'; cat \"${CLAUDE_PLUGIN_ROOT}/skills/goatie/SKILL.md\"",
-            "commandWindows": "Write-Output 'GOATIE MODE ACTIVE — level: full'; Get-Content \"$env:CLAUDE_PLUGIN_ROOT\\skills\\goatie\\SKILL.md\"",
+            "command": "echo 'MANBUN MODE ACTIVE — level: full'; cat \"${CLAUDE_PLUGIN_ROOT}/skills/manbun/SKILL.md\"",
+            "commandWindows": "Write-Output 'MANBUN MODE ACTIVE — level: full'; Get-Content \"$env:CLAUDE_PLUGIN_ROOT\\skills\\manbun\\SKILL.md\"",
             "timeout": 5,
-            "statusMessage": "Loading goatie mode..."
+            "statusMessage": "Loading manbun mode..."
           }
         ]
       }

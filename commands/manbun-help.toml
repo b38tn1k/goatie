@@ -1,0 +1,2 @@
+description = "Show the manbun quick-reference card"
+prompt = "Show the manbun-help reference card from the manbun-help skill, verbatim, then stop."

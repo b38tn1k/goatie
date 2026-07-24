@@ -1,12 +1,12 @@
 ---
-name: goatie-audit
+name: manbun-audit
 description: >
   Whole-app UX audit against a 120-point first-time-user scorecard. Like
-  goatie-review, but scans the entire application instead of a diff:
+  manbun-review, but scans the entire application instead of a diff:
   scores ten weighted categories, then ranks the top problems and
   highest-value fixes. Use when the user says "audit the ux", "score the
-  app", "ux audit", "how usable is this", "goatie-audit", or
-  "/goatie-audit". One-shot report, does not apply fixes.
+  app", "ux audit", "how usable is this", "manbun-audit", or
+  "/manbun-audit". One-shot report, does not apply fixes.
 ---
 
 Act as a senior SaaS UX reviewer evaluating the application as a
@@ -93,11 +93,19 @@ stated as a percentage in the report, never silently skipped.
   first-time-user audit against a full production mirror is fiction.
   Never write test data into a shared or prod-mirrored database; if
   feedback-after-write can't be observed safely, score it static and
-  say so.
+  say so. A file-backed database (SQLite) is a free scratch
+  environment: copy it, point the app at the copy, and walk the write
+  paths without touching anything real — check for this before
+  declaring mutations unwalkable.
 - **Other cameras.** The walk is the same off the web, only the camera
   changes: iOS/Android via simulator screenshot and tap tools, desktop
   apps via OS screenshot control, TUIs via terminal capture. Surface
   levels, one-grid, contrast, modes, and journeys apply unchanged.
+  Check for the shortcut first: many desktop shells (Electron, Tauri)
+  just load a localhost web server — run the server alone and walk it
+  in the browser with the full instrument kit, and score only the
+  shell-owned behaviors (window chrome, quit semantics, tray/idle)
+  statically.
 
 **2b. Surface & weight pass — measured, never vibed.** Run on every key
 screen. The rule here is: measure what is, judge the proportion, phrase
@@ -224,7 +232,7 @@ both (handler exists in code AND the spinner actually appears).
 opinion with a bibliography.
 
 - **Receipts.** Save every capture to an evidence directory
-  (`.goatie/evidence/<date>/<route>--<mode>.png`, conventions in
+  (`.manbun/evidence/<date>/<route>--<mode>.png`, conventions in
   `toolkit.md`); every finding cites its receipt by name. Offer the
   annotated gallery as a published artifact when the user wants to see,
   not just read. When the harness can't persist pixels, the measurement
@@ -232,7 +240,7 @@ opinion with a bibliography.
   in coverage, and never let a missing PNG silently downgrade a
   finding.
 - **Baseline.** Write the scorecard, coverage numbers, and finding list
-  to `.goatie/audit-<date>.json` (schema in `toolkit.md`) — the only
+  to `.manbun/audit-<date>.json` (schema in `toolkit.md`) — the only
   thing an audit ever writes. When a previous baseline exists, open the
   report with the delta: per-category movement, findings fixed,
   findings new, findings still open. One audit is a snapshot; two are
@@ -286,12 +294,12 @@ responsiveness, keyboard usability, overall consistency.
    friction it causes, and its receipt.
 6. **Top 5 highest-value improvements** — each with estimated effort (S/M/L) and expected user impact.
 7. Every improvement phrased as the smallest change that fixes the
-   friction, goatie-style — directional where visual ("fatten",
+   friction, manbun-style — directional where visual ("fatten",
    "skinny down", "raise contrast"), never a hardcoded constant.
 
 ## Boundaries
 
-Reports only, applies nothing — the sole writes are `.goatie/` receipts
+Reports only, applies nothing — the sole writes are `.manbun/` receipts
 and the baseline JSON. Never writes to the app's database or submits
 its forms against shared data. Correctness bugs and security found in
 passing get one line and a pointer to a normal review. Pairs with

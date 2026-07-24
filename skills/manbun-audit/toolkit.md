@@ -1,4 +1,4 @@
-# goatie-audit toolkit — paste-ready instruments
+# manbun-audit toolkit — paste-ready instruments
 
 Everything here runs in the page context (browser JS eval). Measurements
 come back as JSON; quote them in findings.
@@ -10,9 +10,9 @@ Inject once, then apply/remove per mode. Screenshot each mode.
 ```js
 // Inject SVG filters for CVD simulation (Machado-style matrices)
 (() => {
-  if (document.getElementById('goatie-cvd')) return 'already injected';
+  if (document.getElementById('manbun-cvd')) return 'already injected';
   const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
-  svg.id = 'goatie-cvd'; svg.style.position='absolute'; svg.style.width='0'; svg.style.height='0';
+  svg.id = 'manbun-cvd'; svg.style.position='absolute'; svg.style.width='0'; svg.style.height='0';
   svg.innerHTML = `
     <filter id="g-protanopia"><feColorMatrix type="matrix" values="0.567 0.433 0 0 0  0.558 0.442 0 0 0  0 0.242 0.758 0 0  0 0 0 1 0"/></filter>
     <filter id="g-deuteranopia"><feColorMatrix type="matrix" values="0.625 0.375 0 0 0  0.7 0.3 0 0 0  0 0.3 0.7 0 0  0 0 0 1 0"/></filter>
@@ -152,7 +152,7 @@ grep -rnE '"(null|undefined|NaN|true|false)"' --include='*.tsx' app components  
 ## 5. Evidence conventions
 
 ```
-.goatie/
+.manbun/
   evidence/<YYYY-MM-DD>/
     <route-with-dashes>--<viewport>--<mode>.png   e.g. play-score--mobile--dark.png
     <route-with-dashes>--<state>.png              e.g. play-home--empty.png
