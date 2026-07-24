@@ -170,6 +170,21 @@ delay on the primary workflow's clicks, route-transition time. The
 question stays perceptual — was there ever a moment with no feedback? —
 but the answer now has milliseconds attached.
 
+**2e. The computer-science-brain check.** Read every number, date,
+label, and ordering on the walked screens as someone who has never
+programmed. Anything that requires knowing how computers count, store,
+sort, or name things is a finding: zero-based numbering shown to users
+("level 0"), raw enums, statuses, and internal ids surfacing in
+headings or copy, ISO/UTC dates ("2026-07 → 2026-07"), unrounded float
+precision, byte-order sorting (Z before a), "1 items" pluralization,
+true/false/null rendered as text. The static half greps the usual leak
+points — rendered array indexes, `toISOString` in markup, status
+fields displayed raw (patterns in `toolkit.md`). The rendered half is
+one question per screen: would someone who has never programmed read
+every visible value the way the developer meant it? Implementation-
+shaped flows belong here too — a UI that makes the user assemble the
+data model (create a node, then link it) instead of doing their task.
+
 **3. Associate & score.** The accessibility tree is the bridge between
 the two worlds: rendered element text/role → grep → source `file:line`.
 Every visual finding gets an anchor (or it isn't actionable); every

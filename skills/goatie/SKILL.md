@@ -54,6 +54,7 @@ higher one and move on.
 - Hierarchy is surfaces before typography: a canvas, raised regions, and one shared alignment grid group the page before font sizes do. Color and weight are load-bearing — contrast carries hierarchy, hue never carries meaning alone.
 - Every mode ships or none do: light, dark, and color-blind-safe, AA contrast in each. Judge weight from the rendered screen and correct in directions (fatten, skinny down, heavier, quieter), not framework constants.
 - Copy is UI: plain verbs on buttons ("Create invoice"), not marketing ("Start your journey"). Group by user task, never by your implementation.
+- Speak the user's language, never the machine's: humans count from one, read local dates, and know words, not enums. A "level 0", a raw status string, an ISO timestamp, or an id in copy is the implementation showing through — translate before it ships.
 - Mark deliberate UX shortcuts with a `goatie:` comment naming the ceiling and upgrade path: `// goatie: alert() for errors, inline toast when there are >2 error paths`.
 
 ## Output

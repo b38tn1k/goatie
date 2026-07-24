@@ -16,4 +16,6 @@ grep -q "Rendered check" skills/goatie-review/SKILL.md || { echo "review lost it
 grep -q "toolkit.md" skills/goatie-audit/SKILL.md || { echo "audit lost its toolkit reference"; exit 1; }
 grep -q "Fresh eyes" skills/goatie-audit/SKILL.md || { echo "audit lost fresh eyes"; exit 1; }
 grep -q "orphan:" skills/goatie-review/SKILL.md || { echo "review lost orphan tag"; exit 1; }
+grep -q "devbrain:" skills/goatie-review/SKILL.md || { echo "review lost devbrain tag"; exit 1; }
+grep -q "computer-science-brain" skills/goatie-audit/SKILL.md || { echo "audit lost CS-brain check"; exit 1; }
 echo "goatie OK"

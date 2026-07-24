@@ -128,7 +128,21 @@ click→visible-feedback across two screenshots. Dev-mode numbers are
 inadmissible — say "dev build, scored structurally" instead of quoting
 them.
 
-## 4. Evidence conventions
+## 4. Computer-science-brain greps
+
+Each hit is a candidate, not a verdict — follow it to the render and
+ask: would a non-programmer read this value the way the developer
+meant it?
+
+```bash
+grep -rnE '\{(i|idx|index)( \+ 1)?\}' --include='*.tsx' app components   # rendered array indexes (+1 present = probably fine)
+grep -rnE 'toISOString|toUTCString|toJSON' --include='*.tsx' app components   # machine dates reaching the UI
+grep -rnE '>\{[a-z]+\.(status|state|type|kind)\}<' --include='*.tsx' app components   # raw enum/status rendered
+grep -rn 'JSON.stringify' --include='*.tsx' app components               # debug output shipped as UI
+grep -rnE '"(null|undefined|NaN|true|false)"' --include='*.tsx' app components   # machine values as copy
+```
+
+## 5. Evidence conventions
 
 ```
 .goatie/

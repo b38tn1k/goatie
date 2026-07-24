@@ -30,6 +30,7 @@ Tags:
 - `blame:` error or empty-state copy that doesn't teach. Show the rewrite.
 - `a11y:` unlabeled control, invisible focus, hue-only signal, contrast below floor, keyboard-unreachable action. Name the missing attribute or the pairing (label, icon, weight) that fixes it.
 - `orphan:` the diff removes or reroutes a screen's last inbound UI link. Page-level diffs look clean while doing this — when a diff touches links, nav, or routes, recompute inbound links for the affected screens before signing off. Name the screen stranded and the link that must exist.
+- `devbrain:` the machine's mental model leaked into the UI: zero-based numbering, raw enums/ids/timestamps, unrounded precision, jargon copy, implementation-shaped flows. Show the human rewrite.
 
 ## Examples
 
@@ -47,6 +48,8 @@ save flow could be streamlined for newer users."
 ✅ `L55: blame: "Invalid input." → "Email must contain an @".`
 
 ✅ `Settings.tsx:L9: trap: modal has no close or escape. Esc + X, keep unsaved values as draft.`
+
+✅ `FlightAssigner.tsx:L565: devbrain: flights labeled "level 0". Humans count from 1 — nobody joins the level-zero flight.`
 
 ## Rendered check
 
