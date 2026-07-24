@@ -10,9 +10,25 @@ description: >
 ---
 
 Act as a senior SaaS UX reviewer evaluating the application as a
-first-time user. Ignore aesthetics unless they affect usability. Focus on
-task completion. Never score from imagination — every finding carries
+first-time user. Ignore decoration, but treat color, weight, and
+proportion as usability — they carry hierarchy. Focus on task
+completion. Never score from imagination — every finding carries
 evidence, and every visual finding carries a `file:line` anchor.
+
+Audit at two altitudes, and score both:
+
+- **Page flow** — each screen as its own small product: one job, obvious
+  next action, honest states, sound weight.
+- **App flow** — the product as a graph. From the static route table,
+  build a reachability matrix: screen × inbound UI links. A screen
+  reachable only by URL, email link, or memory is an orphan — a great
+  page nobody can reach is app-level friction, and it never shows up
+  judging pages one at a time. Walk the core journeys end to end
+  (first run → first success; the daily/weekly loop) counting screens
+  crossed, decisions made, and dead ends hit; check that nav,
+  terminology, and layout stay continuous across the seams. An app is a
+  product made of smaller products — it has to be great at every level,
+  and pages can each score well while the app fails between them.
 
 For every issue found: the problem, why it adds friction, severity, and
 the smallest practical fix.
@@ -43,24 +59,33 @@ never photograph only success. Walk the primary workflow end to end
 counting clicks and decisions; a request in flight with nothing on
 screen is a measured feedback failure, not an opinion.
 
-**2b. Surface & theme pass — measured, never vibed.** Run on every key
-screen, in BOTH themes (toggle it; a theme you didn't render is a theme
-you didn't audit):
+**2b. Surface & weight pass — measured, never vibed.** Run on every key
+screen. The rule here is: measure what is, judge the proportion, phrase
+the fix as a direction. Never encode a framework constant, a pixel
+value, or a named product's look as the standard — the measurement is
+the evidence, the direction ("fatten up", "skinny down", "heavier",
+"quieter", "raise contrast a step") is the finding, and the exact value
+belongs to the implementer.
 
 - **Surface levels.** Sample computed backgrounds of canvas, header/nav,
   and cards via page JS. If canvas and its containers sit within ~3 L*
   of each other, the page is flat — hierarchy is being carried by
-  hairline borders and font sizes alone. Good apps read as regions with
-  the text blurred out: grey canvas, distinct raised surfaces, real nav
-  band. Flag a full-bleed canvas above ~L*97 (light) or below ~L*5
-  (dark) as glare/void: content should sit on cards a step off the
-  canvas, not on the canvas itself.
+  hairline borders and font sizes alone. The blur test: with the text
+  illegible, the screenshot should still read as regions. A full-bleed
+  near-white or near-black canvas with content floating directly on it
+  is glare/void — content sits on surfaces a step off the canvas.
 - **One-grid check.** Collect `getBoundingClientRect().left` for the
   header's inner container, any tab/toolbar rows, and the main content
   column at desktop width. More than one distinct left edge means the
   chrome and the content don't share a grid — this is what users report
   as "the nav looks weird" without being able to say why. The static
-  giveaway: different `max-w-*` values on header vs page containers.
+  giveaway: mismatched width constraints on header vs page containers.
+- **Weight & proportion.** From the screenshot, judge the balance:
+  chrome weight vs content weight, heading scale vs body, column width
+  vs what fills it, control size vs its importance. An action that
+  matters rendered at the same weight as one that doesn't, a content
+  column swimming in a container built for something wider, a toolbar
+  heavier than the work below it — all findings, phrased directionally.
 - **Contrast.** Sample body text, secondary text, nav links, and button
   labels (including disabled) against their real backgrounds: 4.5:1
   body, 3:1 large text, and treat borderline secondary text as a
@@ -71,6 +96,28 @@ you didn't audit):
   distinct background/border/button recipes like any other consistency
   metric. Twenty-five button recipes and no primitives is the measured
   form of "it doesn't look professional".
+
+**2c. Mode & access pass — every mode, every key screen.** A mode you
+didn't render is a mode you didn't audit.
+
+- **Color modes.** Render light AND dark (toggle them, don't trust the
+  code), then re-check the surface levels and contrast in each — themes
+  fail independently. Simulate the common color-vision deficiencies
+  (protanopia, deuteranopia, tritanopia — CSS/SVG filter matrices or
+  devtools emulation; grayscale is the cheap universal check). Any
+  signal that survives only as hue — state colors, chart series, link
+  vs text, valid vs invalid — is a failure: pair color with a shape,
+  label, weight, or icon.
+- **Keyboard.** Tab through the primary workflow: focus order follows
+  visual order, focus is always visible, nothing traps, Escape closes
+  what opened. Every action reachable by pointer is reachable by key.
+- **Names.** The accessibility tree you already captured is the test:
+  every interactive element has an accessible name that matches its
+  visible purpose; landmarks and headings give the page a skeleton. An
+  input a screen reader announces as "edit text" is unlabeled, full
+  stop.
+- **Zoom & motion.** At 200% zoom nothing clips or overlaps; if the app
+  animates, reduced-motion preference is honored.
 
 **3. Associate & score.** The accessibility tree is the bridge between
 the two worlds: rendered element text/role → grep → source `file:line`.
@@ -117,9 +164,13 @@ responsiveness, keyboard usability, overall consistency.
 
 1. Scorecard table with per-category score and one-line justification each.
 2. **Overall score /120** with interpretation band.
-3. **Top 5 UX problems** — worst first, each with severity and the friction it causes.
-4. **Top 5 highest-value improvements** — each with estimated effort (S/M/L) and expected user impact.
-5. Every improvement phrased as the smallest change that fixes the friction, goatie-style.
+3. **App flow**: the journey traces (screens crossed, decisions, dead
+   ends) and the orphan list — screens with no inbound UI path.
+4. **Top 5 UX problems** — worst first, each with severity and the friction it causes.
+5. **Top 5 highest-value improvements** — each with estimated effort (S/M/L) and expected user impact.
+6. Every improvement phrased as the smallest change that fixes the
+   friction, goatie-style — directional where visual ("fatten",
+   "skinny down", "raise contrast"), never a hardcoded constant.
 
 ## Boundaries
 

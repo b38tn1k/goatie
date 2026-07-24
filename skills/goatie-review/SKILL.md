@@ -28,6 +28,7 @@ Tags:
 - `silent:` action with no feedback state. Name the missing state (loading / success / error / empty).
 - `trap:` no undo, back, cancel, or escape. Name the exit.
 - `blame:` error or empty-state copy that doesn't teach. Show the rewrite.
+- `a11y:` unlabeled control, invisible focus, hue-only signal, contrast below floor, keyboard-unreachable action. Name the missing attribute or the pairing (label, icon, weight) that fixes it.
 
 ## Examples
 
@@ -53,10 +54,14 @@ components to their routes and screenshot just those screens — that
 render is the evidence for any `hierarchy:` finding. From code alone,
 tag it `hierarchy?:` (suspected) instead. If the diff touches an error
 or empty state, force that state in the render; never review a state's
-happy-path sibling and call it covered. Render touched screens in both
-themes; a flat canvas-colored container, a second left edge against the
-page grid, or borderline text contrast is a `hierarchy:` finding with
-the measurement quoted.
+happy-path sibling and call it covered. Render touched screens in every
+standard mode — light, dark, and a color-vision check (grayscale at
+minimum): a flat canvas-colored container, a second left edge against
+the page grid, borderline contrast, or a hue-only signal is a finding
+with the measurement quoted. Tab through any touched controls. Phrase
+visual fixes as directions — "fatten", "skinny down", "heavier",
+"raise contrast a step" — anchored to the measurement, never to a
+framework constant or a named product's look.
 
 ## Scoring
 

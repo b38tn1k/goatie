@@ -51,7 +51,8 @@ higher one and move on.
 - Errors teach, never blame: what happened, why, how to fix it, whether anything was lost. "Invalid input." is a bug; "Email must contain an @" is the fix.
 - Never trap: undo, back, cancel, escape, close, draft recovery. Destructive actions get undo, not a confirm dialog doing undo's job.
 - Consistency over cleverness: reuse components, layouts, terminology, button placement. Clever is what a first-time user decodes while their task waits.
-- Hierarchy is surfaces before typography: a canvas, raised regions, and one shared alignment grid group the page before font sizes do. Ship both themes, AA contrast, no full-bleed white/black canvas with content floating on it.
+- Hierarchy is surfaces before typography: a canvas, raised regions, and one shared alignment grid group the page before font sizes do. Color and weight are load-bearing — contrast carries hierarchy, hue never carries meaning alone.
+- Every mode ships or none do: light, dark, and color-blind-safe, AA contrast in each. Judge weight from the rendered screen and correct in directions (fatten, skinny down, heavier, quieter), not framework constants.
 - Copy is UI: plain verbs on buttons ("Create invoice"), not marketing ("Start your journey"). Group by user task, never by your implementation.
 - Mark deliberate UX shortcuts with a `goatie:` comment naming the ceiling and upgrade path: `// goatie: alert() for errors, inline toast when there are >2 error paths`.
 
@@ -81,10 +82,10 @@ Example: "Add a settings page for the export format."
 ## When NOT to be minimal
 
 Never cut: feedback states (loading, success, error), empty states,
-accessibility basics (labels, focus order, contrast, keyboard reachability),
-undo on destructive actions, validation messages at input boundaries,
-anything explicitly requested. User insists on the full version → build it,
-no re-arguing.
+accessibility (labels, focus order, keyboard reach, AA contrast,
+hue-independent signals, any standard color mode), undo on destructive
+actions, validation messages at input boundaries, anything explicitly
+requested. User insists on the full version → build it, no re-arguing.
 
 Minimal means fewer decisions for the user, not fewer states in the UI. A
 screen without its loading, empty, and error states is unfinished — that is
