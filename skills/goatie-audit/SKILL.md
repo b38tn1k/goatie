@@ -37,12 +37,40 @@ absurdly expensive by screenshot.
 from the inventory as a first-time user with empty data. Per screen,
 capture BOTH a screenshot and the accessibility tree. The screenshot
 answers what code cannot: the real three-second test, visual hierarchy,
-clutter, contrast — repeat key screens at mobile width (and dark mode if
-supported). Use the phase-1 state list to force the unhappy paths: drive
-each error and empty state, never photograph only success. Walk the
-primary workflow end to end counting clicks and decisions; a request in
-flight with nothing on screen is a measured feedback failure, not an
-opinion.
+clutter, contrast — repeat key screens at mobile width. Use the phase-1
+state list to force the unhappy paths: drive each error and empty state,
+never photograph only success. Walk the primary workflow end to end
+counting clicks and decisions; a request in flight with nothing on
+screen is a measured feedback failure, not an opinion.
+
+**2b. Surface & theme pass — measured, never vibed.** Run on every key
+screen, in BOTH themes (toggle it; a theme you didn't render is a theme
+you didn't audit):
+
+- **Surface levels.** Sample computed backgrounds of canvas, header/nav,
+  and cards via page JS. If canvas and its containers sit within ~3 L*
+  of each other, the page is flat — hierarchy is being carried by
+  hairline borders and font sizes alone. Good apps read as regions with
+  the text blurred out: grey canvas, distinct raised surfaces, real nav
+  band. Flag a full-bleed canvas above ~L*97 (light) or below ~L*5
+  (dark) as glare/void: content should sit on cards a step off the
+  canvas, not on the canvas itself.
+- **One-grid check.** Collect `getBoundingClientRect().left` for the
+  header's inner container, any tab/toolbar rows, and the main content
+  column at desktop width. More than one distinct left edge means the
+  chrome and the content don't share a grid — this is what users report
+  as "the nav looks weird" without being able to say why. The static
+  giveaway: different `max-w-*` values on header vs page containers.
+- **Contrast.** Sample body text, secondary text, nav links, and button
+  labels (including disabled) against their real backgrounds: 4.5:1
+  body, 3:1 large text, and treat borderline secondary text as a
+  finding, not a pass. A disabled button whose label is illegible reads
+  as broken, not disabled.
+- **Token corpus (static half).** Grep for a design-token layer (CSS
+  variables, theme config) versus hand-rolled palette classes; count
+  distinct background/border/button recipes like any other consistency
+  metric. Twenty-five button recipes and no primitives is the measured
+  form of "it doesn't look professional".
 
 **3. Associate & score.** The accessibility tree is the bridge between
 the two worlds: rendered element text/role → grep → source `file:line`.

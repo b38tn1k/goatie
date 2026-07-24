@@ -51,6 +51,7 @@ higher one and move on.
 - Errors teach, never blame: what happened, why, how to fix it, whether anything was lost. "Invalid input." is a bug; "Email must contain an @" is the fix.
 - Never trap: undo, back, cancel, escape, close, draft recovery. Destructive actions get undo, not a confirm dialog doing undo's job.
 - Consistency over cleverness: reuse components, layouts, terminology, button placement. Clever is what a first-time user decodes while their task waits.
+- Hierarchy is surfaces before typography: a canvas, raised regions, and one shared alignment grid group the page before font sizes do. Ship both themes, AA contrast, no full-bleed white/black canvas with content floating on it.
 - Copy is UI: plain verbs on buttons ("Create invoice"), not marketing ("Start your journey"). Group by user task, never by your implementation.
 - Mark deliberate UX shortcuts with a `goatie:` comment naming the ceiling and upgrade path: `// goatie: alert() for errors, inline toast when there are >2 error paths`.
 

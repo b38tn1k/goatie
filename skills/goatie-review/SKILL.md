@@ -53,7 +53,10 @@ components to their routes and screenshot just those screens — that
 render is the evidence for any `hierarchy:` finding. From code alone,
 tag it `hierarchy?:` (suspected) instead. If the diff touches an error
 or empty state, force that state in the render; never review a state's
-happy-path sibling and call it covered.
+happy-path sibling and call it covered. Render touched screens in both
+themes; a flat canvas-colored container, a second left edge against the
+page grid, or borderline text contrast is a `hierarchy:` finding with
+the measurement quoted.
 
 ## Scoring
 
