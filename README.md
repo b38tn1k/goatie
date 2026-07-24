@@ -35,14 +35,19 @@ With goatie:
 
 ## Numbers
 
-Ponytail ships real benchmarks: −54% code, measured on real agent
-sessions, n=4. Goatie is a cover song played live before the album is
-recorded — the only measurement so far is **n=you**.
+Ponytail measured twelve real tasks, four runs each, against a real
+repo, and published the tables. We are not going to pretend that
+happened here.
 
-But it doesn't ask you to take vibes on faith either: `/goatie-audit` is
-the benchmark, run on *your* app. A 120-point scorecard, screenshots and
-source both in evidence, and the one metric the whole thing optimizes:
-**decisions a first-time user never had to make.**
+| vs your current UI | clicks | decisions | confusion | measured |
+|--------------------|--------|-----------|-----------|----------|
+| goatie             | fewer  | fewer     | less      | no       |
+
+Every cell in that table is a vibe. The honest instrument ships in the
+box instead: `/goatie-audit` is the benchmark, run on *your* app — a
+120-point scorecard with screenshots and source both in evidence, and
+the one metric the whole thing optimizes: **decisions a first-time user
+never had to make.** Current sample size: **n=you**.
 
 ## How it works
 
