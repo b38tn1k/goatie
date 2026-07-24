@@ -1,5 +1,12 @@
 # Goatie 🐐
 
+> [!IMPORTANT]
+> **TODO: rename this project to `manbun`.** Same hair as the ponytail, tied
+> differently — which was the joke all along. Rename touches: repo name, the
+> four skills (`/manbun`, `/manbun-review`, `/manbun-audit`, `/manbun-help`),
+> command TOMLs, hook banner, the `manbun:` comment marker, `.manbun/`
+> baseline dirs, and every joke below this line.
+
 > A vibe-coded cover song of [ponytail](https://github.com/DietrichGebert/ponytail).
 > Same chords, different chin. All credit for the idea, the ladder, the
 > levels, and the general hairstyle to Dietrich Gebert's original —
