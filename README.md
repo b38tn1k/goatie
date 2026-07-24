@@ -1,58 +1,71 @@
 # Goatie 🐐
 
 > A vibe-coded cover song of [ponytail](https://github.com/DietrichGebert/ponytail).
-> Same chords, different chin.
+> Same chords, different chin. All credit for the idea, the ladder, the
+> levels, and the general hairstyle to Dietrich Gebert's original —
+> nothing improves on ponytail, this just plays it in a different key.
 
-[Ponytail](https://github.com/DietrichGebert/ponytail) is the best
-plugin-shaped idea in the Claude Code ecosystem: a lazy senior developer,
-riding shotgun in every session, asking *"does this code need to exist at
-all?"* before you write it. It is all business. No fuss. Hair out of the
-eyes, hands on the keyboard. This repo is not an improvement on ponytail.
-Nothing is. Dietrich Gebert already wrote the last word on not writing
-things.
+**He says nothing. He removes one field. They finish.**
 
-But ponytail only governs what you **build**. Nobody was watching what
-the user **sees**. So this is the cover version — recorded in one take,
-by an AI, in somebody's garage, with the original playing through
-headphones. Ponytail asks *"how little can I build?"* Goatie asks:
+You know him too. Goatee. Thick-rimmed glasses. A notebook he writes one
+word in per meeting. He has stood behind the one-way glass at every
+usability test since before the product had its current name, watching a
+thousand first-time users hover a cursor and quietly give up. You show
+him a screen with five buttons; he looks at it, says nothing, and leaves
+one. The next tester finishes without asking anything.
 
-> **How little can the user think?**
->
-> Can a first-time user complete the application's primary job with
-> minimal effort and no confusion? Everything else is in service of that.
+The guy with the ponytail replaces your fifty lines with one. The guy
+with the goatee watches someone's mom try your app.
 
-A ponytail keeps the hair out of *your* eyes. A goatee is the part other
-people have to look at. Hence: domain.
+**Goatie puts him inside your AI agent.**
 
-## Install
+## Before / after
+
+You ask for onboarding. Your agent installs a product-tour library,
+writes a six-step wizard, adds a progress bar, and starts a discussion
+about confetti.
+
+With goatie:
+
+```html
+<!-- goatie: the empty state is the onboarding -->
+<p>No invoices yet. Your first one takes about a minute.</p>
+<button>Create your first invoice</button>
+```
+
+## Numbers
+
+Ponytail ships real benchmarks: −54% code, measured on real agent
+sessions, n=4. Goatie is a cover song played live before the album is
+recorded — the only measurement so far is **n=you**.
+
+But it doesn't ask you to take vibes on faith either: `/goatie-audit` is
+the benchmark, run on *your* app. A 120-point scorecard, screenshots and
+source both in evidence, and the one metric the whole thing optimizes:
+**decisions a first-time user never had to make.**
+
+## How it works
+
+Before drawing UI, the agent stops at the first rung that holds:
 
 ```
-claude plugin marketplace add b38tn1k/goatie
-claude plugin install goatie@goatie
+1. Does the user need to see this at all?  → no: cut it
+2. A convention users already know?        → use it, don't invent
+3. A default can make the decision?        → make it, don't ask
+4. Can it be one step?                     → one step
+5. Only then: new UI — next action obvious in 3 seconds
 ```
 
-## The ladder (you've heard this one before, that's the point)
+The ladder runs after it understands the task, not instead of it: it
+reads the flow the screen lives in before picking a rung. Minimal for
+the user, never at the user's expense — loading, empty, and error
+states, undo on destructive actions, accessibility basics, and
+validation messages are never on the chopping block. Minimal means
+fewer decisions, not fewer states.
 
-| Rung | Ponytail (the original) | Goatie (the cover) |
-|------|------------------------|--------------------|
-| 1 | Does this need to exist at all? | Does the user need to see this at all? |
-| 2 | Stdlib does it? | A convention users already know covers it? |
-| 3 | Native platform feature? | A default removes the decision? |
-| 4 | Existing dependency? | Can it be one step? |
-| 5 | The minimum code that works | New UI — next action obvious in 3 seconds |
-
-Stop at the first rung that holds. The ladder is a reflex, not a
-research project.
-
-## What you get
-
-| Piece | What it does |
-|-------|--------------|
-| **goatie mode** | Injected at session start. Every screen goes down the ladder. One primary action per screen, every action answers back, empty states and errors teach, never trap the user. Levels: lite / full / ultra. |
-| `/goatie` | Switch level (`lite`, `full`, `ultra`) or reactivate. |
-| `/goatie-review` | Friction review of a diff. Tagged one-liners: `cut:` `convention:` `default:` `hierarchy:` `silent:` `trap:` `blame:`. Ends with net decisions saved for a first-time user, or `First-time user ships. Done.` |
-| `/goatie-audit` | Whole-app audit against a 120-point scorecard: purpose, workflow, navigation, cognitive load, hierarchy, feedback, onboarding, errors, control, performance feel. Top 5 problems, top 5 fixes with effort and impact. |
-| `/goatie-help` | Reference card. |
+Deliberate shortcuts get marked `// goatie: ...` with the ceiling and
+the upgrade path, same ledger discipline as `// ponytail: ...`. Facial-
+hair comments accumulate; that's the system working.
 
 ## Evidence, not vibes (the vibes were only for the coding)
 
@@ -62,10 +75,10 @@ screenshots each lie alone:
 1. **Static inventory** — the route table is the screen list (coverage
    you can prove), plus corpus greps for missing states, missing exits,
    and every `"Invalid input."` in the building.
-2. **Rendered walk** — launch the app, visit every route as a first-time
-   user with empty data, capture screenshot **and** accessibility tree,
-   force the error/empty states, click the primary workflow end to end
-   counting decisions.
+2. **Rendered walk** — launch the app, visit every route as a
+   first-time user with empty data, capture screenshot **and**
+   accessibility tree, force the error and empty states, click the
+   primary workflow end to end counting decisions.
 3. **Associate** — the accessibility tree bridges pixels to source:
    rendered text → grep → `file:line`. Visual findings get anchors,
    static findings get confirmed by the render, or they don't ship.
@@ -74,30 +87,59 @@ Missing undo is static-sufficient. Weak hierarchy is visual-sufficient.
 Feedback needs both: the handler in the code *and* the spinner on the
 screen.
 
-## Ledger
+## Install
 
-Deliberate UX shortcuts are marked `// goatie: ...` in code, naming the
-ceiling and the upgrade path — the same debt ledger ponytail keeps with
-`// ponytail: ...`. Facial-hair comments accumulate; that's the system
-working.
+The most effort goatie will ever ask of a first-time user:
 
-## Never cut
+```
+claude plugin marketplace add b38tn1k/goatie
+claude plugin install goatie@goatie
+```
 
-Loading/empty/error states, undo on destructive actions, accessibility
-basics, validation messages. Minimal means fewer decisions for the user,
-not fewer states in the UI.
+(Two separate prompts, in that order.)
 
-## Stacking
+Ponytail installs on twenty agents. Goatie installs on one. He noticed
+you only ever use one.
 
-They're better as a duet: **the laziest code behind the clearest
-screen.** Ponytail deletes the abstraction; goatie deletes the decision.
-Run both and ship something a first-time user finishes before their
-coffee needs a `// ponytail:` comment.
+That was it. Two steps. He counted, and he thinks it should be one.
+
+## Commands
+
+| Command | What it does |
+|---------|--------------|
+| `/goatie [lite \| full \| ultra \| off]` | Set the intensity, or turn it off. `ultra` challenges a screen's existence before styling it. |
+| `/goatie-review` | Review the current diff for first-time-user friction. Tagged one-liners: `cut:` `convention:` `default:` `hierarchy:` `silent:` `trap:` `blame:`. Ends with net decisions saved, or `First-time user ships. Done.` |
+| `/goatie-audit` | Audit the whole app against the 120-point scorecard, evidence protocol and all. Top 5 problems, top 5 fixes with effort and impact. |
+| `/goatie-help` | Quick reference for the commands above. |
+
+## FAQ
+
+**Can I use it with ponytail?** Yes, and you should. Different halves,
+no overlap: ponytail shrinks what the agent builds, goatie shrinks what
+the user has to think about. The laziest code behind the clearest
+screen.
+
+**What if I really need the six-step wizard?** You don't. Insist anyway
+and he'll build it. Every step will have a working back button. You'll
+meet all of them.
+
+**Does it scale?** The decision the user never faces scales infinitely.
+Zero support tickets, zero rage-clicks, 100% task completion since
+forever.
+
+**Where's the settings page?** There isn't one. That's the whole
+lesson.
+
+**Why "goatie"?** You know exactly why.
+
+## License
+
+MIT. The default license, so you never had to decide.
 
 ---
 
-*Cover songs owe royalties: all credit for the idea, the ladder, the
-intensity levels, the debt-comment ledger, and the general hairstyle to
-[Dietrich Gebert's ponytail](https://github.com/DietrichGebert/ponytail).
-This one was vibe-coded with Claude Code in an afternoon. MIT, like the
-original.*
+*Cover songs owe royalties: everything structural here is
+[Dietrich Gebert's ponytail](https://github.com/DietrichGebert/ponytail),
+transposed from code to screens. This one was vibe-coded with Claude
+Code in an afternoon, which the goatee guy would point out is itself a
+first-time-user story with exactly one step.*
