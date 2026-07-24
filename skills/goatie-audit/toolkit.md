@@ -36,6 +36,13 @@ same thing — finding.
 
 ## 2. Surface, grid & contrast measurement
 
+**Calibrate before you sweep.** Measure one element you can verify by
+eye first — a white-on-near-black H1 should read ~15–21:1. If the
+instrument returns nonsense (ratio 1.0 on visible text, L*100 on a
+dark page), the parser is broken, not the page; fix it before trusting
+any number. Both field bugs so far announced themselves exactly this
+way.
+
 Computed colors may come back as `lab()`/`oklab()`; normalize through a
 canvas before doing math.
 
@@ -168,7 +175,9 @@ an artifact on request.
                   "control": 0, "performance": 0 },
   "overall": 0,
   "findings": [ { "id": "kebab-slug", "file": "", "line": 0, "severity": "high|med|low",
-                  "summary": "", "receipt": "" } ]
+                  "summary": "", "receipt": "",
+                  "confirmedBy": "measured|fresh-eyes|skeptic|static|unverified",
+                  "count": 1 } ]
 }
 ```
 

@@ -201,12 +201,24 @@ both (handler exists in code AND the spinner actually appears).
   this app, what would you do next, which action is primary? Its answer
   IS the measurement — its confusion is a purpose-clarity or hierarchy
   finding with the quote attached, and its correct guess is the pass.
+  Hygiene: tell it nothing about the product, not even the domain;
+  prefer the prod build (dev overlays pollute first impressions), and
+  discount any dev-only chrome it flags.
 - **Skeptic pass.** Perception findings (weight, proportion, hierarchy,
   clutter) are taste calls until challenged. Before the report, hand
   each one plus its evidence to a verifier prompted to REFUTE it. A
   finding that survives ships as confirmed; one that doesn't is demoted
   to a suggestion or dropped. Mechanical findings (contrast ratios,
   missing names, orphans) skip the panel — arithmetic needs no jury.
+- **Confirmation labels.** Every finding carries what confirmed it:
+  `measured`, `fresh-eyes`, `skeptic`, `static`, or `unverified`. A
+  taste call that skipped the skeptic pass ships labeled `unverified`
+  — skipping a pass under time pressure is allowed; hiding that it was
+  skipped is not.
+- **Causes, not symptoms.** Cluster before ranking: 1,500 failing
+  labels sharing one token is ONE finding with a count attached, not
+  1,500 findings. Top-5 lists rank causes; the count is the severity
+  evidence.
 
 **4. Receipts & baseline.** An audit that discards its evidence is an
 opinion with a bibliography.
@@ -215,7 +227,10 @@ opinion with a bibliography.
   (`.goatie/evidence/<date>/<route>--<mode>.png`, conventions in
   `toolkit.md`); every finding cites its receipt by name. Offer the
   annotated gallery as a published artifact when the user wants to see,
-  not just read.
+  not just read. When the harness can't persist pixels, the measurement
+  JSON and accessibility trees ARE the receipts — write those, say so
+  in coverage, and never let a missing PNG silently downgrade a
+  finding.
 - **Baseline.** Write the scorecard, coverage numbers, and finding list
   to `.goatie/audit-<date>.json` (schema in `toolkit.md`) — the only
   thing an audit ever writes. When a previous baseline exists, open the
