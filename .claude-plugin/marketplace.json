@@ -1,0 +1,16 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "goatie",
+  "description": "First-time-user UX mode for AI agents. The best UI is the one nobody has to learn.",
+  "owner": {
+    "name": "James Carthew"
+  },
+  "plugins": [
+    {
+      "name": "goatie",
+      "description": "Judges every screen by first-time-user task completion. Conventions over invention, defaults over decisions, one primary action per screen.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}

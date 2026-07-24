@@ -1,0 +1,2 @@
+description = "Show the goatie quick-reference card"
+prompt = "Show the goatie-help reference card from the goatie-help skill, verbatim, then stop."

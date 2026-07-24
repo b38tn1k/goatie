@@ -1,0 +1,8 @@
+{
+  "name": "goatie",
+  "version": "0.1.0",
+  "description": "First-time-user mode. Judges every screen by one question: can a first-time user complete the primary job with minimal effort and no confusion?",
+  "author": {
+    "name": "James Carthew"
+  }
+}

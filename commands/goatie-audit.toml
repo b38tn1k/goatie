@@ -1,0 +1,2 @@
+description = "Whole-app UX audit with 120-point first-time-user scorecard"
+prompt = "Run a goatie-audit on {{args}} (default: this application). Use the goatie-audit skill: walk the real screens, score all ten scorecard categories out of 120, then report overall score with interpretation band, top 5 UX problems, and top 5 highest-value improvements with effort and impact. Report only, apply nothing."

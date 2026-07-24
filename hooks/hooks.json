@@ -1,0 +1,18 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'GOATIE MODE ACTIVE — level: full'; cat \"${CLAUDE_PLUGIN_ROOT}/skills/goatie/SKILL.md\"",
+            "commandWindows": "Write-Output 'GOATIE MODE ACTIVE — level: full'; Get-Content \"$env:CLAUDE_PLUGIN_ROOT\\skills\\goatie\\SKILL.md\"",
+            "timeout": 5,
+            "statusMessage": "Loading goatie mode..."
+          }
+        ]
+      }
+    ]
+  }
+}
