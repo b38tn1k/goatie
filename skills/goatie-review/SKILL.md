@@ -29,6 +29,7 @@ Tags:
 - `trap:` no undo, back, cancel, or escape. Name the exit.
 - `blame:` error or empty-state copy that doesn't teach. Show the rewrite.
 - `a11y:` unlabeled control, invisible focus, hue-only signal, contrast below floor, keyboard-unreachable action. Name the missing attribute or the pairing (label, icon, weight) that fixes it.
+- `orphan:` the diff removes or reroutes a screen's last inbound UI link. Page-level diffs look clean while doing this — when a diff touches links, nav, or routes, recompute inbound links for the affected screens before signing off. Name the screen stranded and the link that must exist.
 
 ## Examples
 

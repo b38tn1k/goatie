@@ -12,4 +12,8 @@ done
 grep -q "120" skills/goatie-audit/SKILL.md || { echo "audit lost its scorecard"; exit 1; }
 grep -q "Evidence protocol" skills/goatie-audit/SKILL.md || { echo "audit lost its evidence protocol"; exit 1; }
 grep -q "Rendered check" skills/goatie-review/SKILL.md || { echo "review lost its rendered check"; exit 1; }
+[ -s skills/goatie-audit/toolkit.md ] || { echo "missing toolkit"; exit 1; }
+grep -q "toolkit.md" skills/goatie-audit/SKILL.md || { echo "audit lost its toolkit reference"; exit 1; }
+grep -q "Fresh eyes" skills/goatie-audit/SKILL.md || { echo "audit lost fresh eyes"; exit 1; }
+grep -q "orphan:" skills/goatie-review/SKILL.md || { echo "review lost orphan tag"; exit 1; }
 echo "goatie OK"

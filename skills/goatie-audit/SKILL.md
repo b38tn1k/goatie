@@ -49,15 +49,55 @@ blaming error string ("Invalid input.") — consistency and error-copy are
 corpus properties, score them here, they are nearly free statically and
 absurdly expensive by screenshot.
 
+Close phase 1 with two declarations the rest of the audit is bound by:
+
+- **Personas.** Enumerate the distinct users from routes, roles, and
+  auth gates (e.g. player / captain / admin / operator). Each persona
+  gets its own primary journey walked in phase 2 — an audit that walks
+  one persona of four has audited a quarter of the app, and must say so.
+- **Calibration.** Name each surface's audience and calibrate
+  expectations, not weights: an expert operator console may earn its
+  density and lean on training; a consumer surface may not. When the
+  app is genuinely several products in one shell, score each surface
+  and report both the split and the blend — never average away a
+  finding.
+
 **2. Rendered walk — perception.** Launch the app and visit every route
-from the inventory as a first-time user with empty data. Per screen,
-capture BOTH a screenshot and the accessibility tree. The screenshot
-answers what code cannot: the real three-second test, visual hierarchy,
-clutter, contrast — repeat key screens at mobile width. Use the phase-1
-state list to force the unhappy paths: drive each error and empty state,
-never photograph only success. Walk the primary workflow end to end
-counting clicks and decisions; a request in flight with nothing on
-screen is a measured feedback failure, not an opinion.
+from the inventory. Per screen, capture BOTH a screenshot and the
+accessibility tree. The screenshot answers what code cannot: the real
+three-second test, visual hierarchy, clutter, contrast. Walk each
+persona's primary journey end to end counting clicks and decisions; a
+request in flight with nothing on screen is a measured feedback
+failure, not an opinion.
+
+The coverage bar is explicit, not "key screens": every distinct layout
+template at desktop AND mobile width, every screen in every persona's
+primary journey, every forced unhappy state. Anything below that bar is
+stated as a percentage in the report, never silently skipped.
+
+- **Walled screens.** An auth wall is not a stopping point, it's a
+  ladder: (a) use the repo's own test-auth infra (storage state, test
+  users, signing helpers — the e2e directory usually knows); (b) ask
+  the user to sign in once in the shared browser and walk on their
+  session; (c) seed a disposable test account via the app's own
+  fixtures. You never type credentials or create accounts yourself —
+  the user or the repo's tooling authenticates, you walk. If no rung
+  works, score the static-sufficient categories, mark render-only ones
+  "unscored — needs render", and lead the report with the coverage
+  number.
+- **Forcing states.** "Force the empty and error states" needs a
+  method, not a wish: repo fixtures and seed scripts, dev/test-only
+  routes, invalid tokens and ids, network throttling or a killed
+  backend for error paths, a scratch database for write flows. The
+  first-run experience must be walked with genuinely empty data — a
+  first-time-user audit against a full production mirror is fiction.
+  Never write test data into a shared or prod-mirrored database; if
+  feedback-after-write can't be observed safely, score it static and
+  say so.
+- **Other cameras.** The walk is the same off the web, only the camera
+  changes: iOS/Android via simulator screenshot and tap tools, desktop
+  apps via OS screenshot control, TUIs via terminal capture. Surface
+  levels, one-grid, contrast, modes, and journeys apply unchanged.
 
 **2b. Surface & weight pass — measured, never vibed.** Run on every key
 screen. The rule here is: measure what is, judge the proportion, phrase
@@ -103,11 +143,12 @@ didn't render is a mode you didn't audit.
 - **Color modes.** Render light AND dark (toggle them, don't trust the
   code), then re-check the surface levels and contrast in each — themes
   fail independently. Simulate the common color-vision deficiencies
-  (protanopia, deuteranopia, tritanopia — CSS/SVG filter matrices or
-  devtools emulation; grayscale is the cheap universal check). Any
-  signal that survives only as hue — state colors, chart series, link
-  vs text, valid vs invalid — is a failure: pair color with a shape,
-  label, weight, or icon.
+  (protanopia, deuteranopia, tritanopia; grayscale is the cheap
+  universal check) — paste-ready filter matrices and the injection
+  snippet live in `toolkit.md` next to this skill, so this is a paste,
+  not a project. Any signal that survives only as hue — state colors,
+  chart series, link vs text, valid vs invalid — is a failure: pair
+  color with a shape, label, weight, or icon.
 - **Keyboard.** Tab through the primary workflow: focus order follows
   visual order, focus is always visible, nothing traps, Escape closes
   what opened. Every action reachable by pointer is reachable by key.
@@ -119,6 +160,16 @@ didn't render is a mode you didn't audit.
 - **Zoom & motion.** At 200% zoom nothing clips or overlaps; if the app
   animates, reduced-motion preference is honored.
 
+**2d. Performance — instrumented, not inferred.** Loading-state presence
+in code is a proxy; the category deserves numbers. Audit against a
+production build where the repo supports one (`next build && start` or
+equivalent) — dev-mode timings are inadmissible as evidence, and a
+dev-only walk says so and scores structurally. Sample via page JS
+(snippets in `toolkit.md`): first paint and LCP, layout shift, input
+delay on the primary workflow's clicks, route-transition time. The
+question stays perceptual — was there ever a moment with no feedback? —
+but the answer now has milliseconds attached.
+
 **3. Associate & score.** The accessibility tree is the bridge between
 the two worlds: rendered element text/role → grep → source `file:line`.
 Every visual finding gets an anchor (or it isn't actionable); every
@@ -128,9 +179,39 @@ when the definitionally sufficient modality confirms it: missing undo is
 static-sufficient, weak hierarchy is visual-sufficient, feedback needs
 both (handler exists in code AND the spinner actually appears).
 
+- **Fresh eyes.** You cannot administer the three-second test — you've
+  read the codebase, so you're the architect squinting, not a
+  first-time user. Spawn a context-free subagent per landing and
+  journey-entry screen, show it ONLY the screenshot, and ask: what is
+  this app, what would you do next, which action is primary? Its answer
+  IS the measurement — its confusion is a purpose-clarity or hierarchy
+  finding with the quote attached, and its correct guess is the pass.
+- **Skeptic pass.** Perception findings (weight, proportion, hierarchy,
+  clutter) are taste calls until challenged. Before the report, hand
+  each one plus its evidence to a verifier prompted to REFUTE it. A
+  finding that survives ships as confirmed; one that doesn't is demoted
+  to a suggestion or dropped. Mechanical findings (contrast ratios,
+  missing names, orphans) skip the panel — arithmetic needs no jury.
+
+**4. Receipts & baseline.** An audit that discards its evidence is an
+opinion with a bibliography.
+
+- **Receipts.** Save every capture to an evidence directory
+  (`.goatie/evidence/<date>/<route>--<mode>.png`, conventions in
+  `toolkit.md`); every finding cites its receipt by name. Offer the
+  annotated gallery as a published artifact when the user wants to see,
+  not just read.
+- **Baseline.** Write the scorecard, coverage numbers, and finding list
+  to `.goatie/audit-<date>.json` (schema in `toolkit.md`) — the only
+  thing an audit ever writes. When a previous baseline exists, open the
+  report with the delta: per-category movement, findings fixed,
+  findings new, findings still open. One audit is a snapshot; two are
+  an instrument.
+
 Can't run the app? Score the static-sufficient categories, mark the
-perceptual ones "unscored — needs render", and say so in the overall
-score. Never guess a perception score from source code.
+perceptual ones "unscored — needs render", and lead the report with the
+rendered-coverage percentage. Never guess a perception score from
+source code.
 
 ## Scorecard
 
@@ -162,19 +243,27 @@ responsiveness, keyboard usability, overall consistency.
 
 ## Output
 
-1. Scorecard table with per-category score and one-line justification each.
-2. **Overall score /120** with interpretation band.
-3. **App flow**: the journey traces (screens crossed, decisions, dead
+1. **Coverage & calibration**: rendered %, personas walked, modes
+   rendered, prod-or-dev build — and the delta vs the previous baseline
+   when one exists. This leads; a score without its coverage is
+   marketing.
+2. Scorecard table with per-category score and one-line justification
+   each (split per surface when calibration split them).
+3. **Overall score /120** with interpretation band.
+4. **App flow**: the journey traces (screens crossed, decisions, dead
    ends) and the orphan list — screens with no inbound UI path.
-4. **Top 5 UX problems** — worst first, each with severity and the friction it causes.
-5. **Top 5 highest-value improvements** — each with estimated effort (S/M/L) and expected user impact.
-6. Every improvement phrased as the smallest change that fixes the
+5. **Top 5 UX problems** — worst first, each with severity, the
+   friction it causes, and its receipt.
+6. **Top 5 highest-value improvements** — each with estimated effort (S/M/L) and expected user impact.
+7. Every improvement phrased as the smallest change that fixes the
    friction, goatie-style — directional where visual ("fatten",
    "skinny down", "raise contrast"), never a hardcoded constant.
 
 ## Boundaries
 
-Reports only, applies nothing. Correctness bugs and security found in
+Reports only, applies nothing — the sole writes are `.goatie/` receipts
+and the baseline JSON. Never writes to the app's database or submits
+its forms against shared data. Correctness bugs and security found in
 passing get one line and a pointer to a normal review. Pairs with
 /ponytail-audit: that one hunts over-engineered code, this one hunts
 over-complicated screens.

@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "shadowleague",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--dir", "/Users/jamescarthew/Developer/ShadowLeague/web", "dev"],
+      "port": 3000
+    }
+  ]
+}
