@@ -39,18 +39,32 @@ same thing — finding.
 Computed colors may come back as `lab()`/`oklab()`; normalize through a
 canvas before doing math.
 
+Two field-proven traps: (1) `getComputedStyle` colors are often
+`rgba(...)` with alpha — 40%-white muted text read as full white gives
+ratio 1.0 nonsense; composite alpha over the effective background
+before any math. (2) The canvas `fillStyle` normalization trick fails
+silently on `lab()`/`oklch()` in some embedded browsers — if a color
+string doesn't parse, the screenshot pixel is the ground truth:
+sample it there instead of trusting a wrong number.
+
 ```js
 (() => {
-  const ctx = document.createElement('canvas').getContext('2d');
-  const rgb = c => { ctx.fillStyle = '#000'; ctx.fillStyle = c;
-    const m = ctx.fillStyle.match(/\d+(\.\d+)?/g); return m ? m.slice(0,3).map(Number) : null; };
+  const parse = s => { const m = s.match(/[\d.]+/g); if (!m) return null;
+    const [r,g,b,a] = m.map(Number); return {rgb:[r,g,b], a: s.startsWith('rgba') ? a : 1}; };
+  const bgOf = el => { let acc = null;
+    for (let e = el; e; e = e.parentElement) {
+      const c = parse(getComputedStyle(e).backgroundColor); if (!c || c.a === 0) continue;
+      if (!acc) { if (c.a === 1) return c.rgb; acc = c; continue; }
+      acc = {rgb: acc.rgb.map((v,i) => acc.a*v + (1-acc.a)*c.rgb[i]), a: 1};
+      if (c.a === 1) return acc.rgb;
+    } return acc ? acc.rgb : [255,255,255]; };
+  const fgOf = el => { const c = parse(getComputedStyle(el).color); const bg = bgOf(el);
+    return c.a === 1 ? c.rgb : c.rgb.map((v,i) => c.a*v + (1-c.a)*bg[i]); };
   const lum = ([r,g,b]) => { [r,g,b]=[r,g,b].map(v=>{v/=255; return v<=0.03928? v/12.92 : ((v+0.055)/1.055)**2.4});
     return 0.2126*r+0.7152*g+0.0722*b; };
   const ratio = (a,b) => { const [x,y]=[lum(a),lum(b)].sort((p,q)=>q-p); return +((x+0.05)/(y+0.05)).toFixed(2); };
   const Lstar = c => { const y=lum(c); return +(y>0.008856 ? 116*Math.cbrt(y)-16 : 903.3*y).toFixed(1); };
-  const bgOf = el => { for (let e=el; e; e=e.parentElement) {
-    const c = rgb(getComputedStyle(e).backgroundColor);
-    if (c && getComputedStyle(e).backgroundColor !== 'rgba(0, 0, 0, 0)') return c; } return rgb('#fff'); };
+  const rgb = c => parse(c)?.rgb ?? null;
   const cs = el => el ? getComputedStyle(el) : null;
 
   // --- surfaces: canvas vs nav vs first cards ---
@@ -63,11 +77,13 @@ canvas before doing math.
     [header?.firstElementChild, document.querySelector('main'),
      ...document.querySelectorAll('[role=tablist], .tabs, main > div')]
     .filter(Boolean).map(e => Math.round(e.getBoundingClientRect().left)))];
-  // --- contrast: body text, muted text, buttons (incl. disabled) ---
+  // --- contrast: sweep ALL leaf text, cluster the failures ---
   const sample = el => el && { text: el.textContent.trim().slice(0,30),
-    ratio: ratio(rgb(cs(el).color), bgOf(el)) };
+    px: +parseFloat(cs(el).fontSize).toFixed(1), ratio: ratio(fgOf(el), bgOf(el)) };
+  const leaves = [...document.querySelectorAll('main *')]
+    .filter(e => e.children.length === 0 && e.textContent.trim()).map(sample);
+  const failing = leaves.filter(s => (s.px < 18.7 && s.ratio < 4.5) || (s.px >= 18.7 && s.ratio < 3));
   const p = document.querySelector('main p, p');
-  const muted = [...document.querySelectorAll('p, span, small')].find(e => Lstar(rgb(cs(e).color)) > 35 && Lstar(rgb(cs(e).color)) < 65);
   const btns = [...document.querySelectorAll('button')].slice(0,4).map(sample);
 
   return JSON.stringify({
@@ -76,11 +92,16 @@ canvas before doing math.
     cardLs: cards.map(c => Lstar(bgOf(c))),
     leftEdges: edges,                    // >1 distinct value = grid finding
     bodyText: sample(p),                 // < 4.5 = finding
-    mutedText: sample(muted),            // borderline = finding, not a pass
+    textEls: leaves.length,
+    aaFailing: failing.length,           // cluster & quote the worst offenders
     buttons: btns,
   }, null, 1);
 })();
 ```
+
+Also probe focus visibility while you're here: `.focus()` the primary
+CTA and read `outline`/`boxShadow` — "none/none" on a focused control
+is a confirmed a11y finding, no render judgment needed.
 
 Reading it: `canvasL` vs `headerL`/`cardLs` within ~3 L* = flat.
 `canvasL` > ~97 or < ~5 with content sitting directly on it = glare /
