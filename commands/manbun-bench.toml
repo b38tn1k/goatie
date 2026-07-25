@@ -1,0 +1,2 @@
+description = "Benchmark manbun-audit against the planted-defect fixtures"
+prompt = "Run manbun-bench{{args}}. Use the manbun-bench skill: serve the fixtures, spawn one blind auditor subagent per fixture with the spoiler rules, score recall against each truth.json and false positives on the clean control, log the run to fixtures/runs.md, and report which missed defects should become new skill checks."

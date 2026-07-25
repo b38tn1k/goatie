@@ -28,14 +28,26 @@ THE LADDER (stop at the first rung that holds)
   5. Only then: new UI — next action obvious in 3 seconds.
 
 COMMANDS
-  /manbun-review       friction review of a diff (cut/convention/default/
-                       hierarchy/silent/trap/blame findings)
-  /manbun-audit        whole-app audit, 120-point scorecard
+  /manbun-review       friction review of a diff. Tags: cut / convention /
+                       default / hierarchy / silent / trap / blame /
+                       a11y / orphan / devbrain
+  /manbun-audit        whole-app audit: 120-pt scorecard, page flow +
+                       app flow, every color mode (light/dark/CVD/
+                       forced-colors), WCAG 2.2 AA checks, fresh-eyes
+                       subagents, receipts, baseline with deltas
+  /manbun-bench        measure the audit against the planted-defect
+                       fixtures: blind subagent auditors, recall +
+                       false-positive scoring, logged runs
   /manbun-help         this card
 
 NEVER CUT
   loading/success/error states, empty states, undo on destructive
-  actions, accessibility basics, validation messages.
+  actions, accessibility (labels, focus, keyboard reach, AA contrast,
+  hue-independent signals, every standard color mode), validation
+  messages.
+
+MARK SHORTCUTS
+  // manbun: <what was simplified, ceiling, upgrade path>
 
 Pairs with ponytail: manbun governs what the user sees,
 ponytail governs what you build.

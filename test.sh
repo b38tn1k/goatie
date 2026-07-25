@@ -18,6 +18,7 @@ grep -q "Fresh eyes" skills/manbun-audit/SKILL.md || { echo "audit lost fresh ey
 grep -q "orphan:" skills/manbun-review/SKILL.md || { echo "review lost orphan tag"; exit 1; }
 grep -q "devbrain:" skills/manbun-review/SKILL.md || { echo "review lost devbrain tag"; exit 1; }
 grep -q "computer-science-brain" skills/manbun-audit/SKILL.md || { echo "audit lost CS-brain check"; exit 1; }
+[ -s skills/manbun-bench/SKILL.md ] && [ -s commands/manbun-bench.toml ] || { echo "missing bench skill"; exit 1; }
 [ -s skills/manbun-audit/a11y.md ] || { echo "missing a11y reference"; exit 1; }
 grep -q "2.5.8" skills/manbun-audit/a11y.md || { echo "a11y lost WCAG 2.2 checks"; exit 1; }
 node -e 'const t=JSON.parse(require("fs").readFileSync("fixtures/beige-crm/truth.json")); if(t.defects.length!==t.plantedTotal) throw new Error("beige-crm truth count mismatch")'
