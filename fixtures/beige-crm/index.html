@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RelateSphere</title>
+<style>
+  * { margin:0; box-sizing:border-box; font-family:-apple-system, "Segoe UI", Roboto, sans-serif; }
+  *:focus { outline: none; }
+  body { background:#ffffff; color:#202124; }
+  header { border-bottom:1px solid #eee; }
+  .hwrap { max-width:1100px; margin:0 auto; padding:14px 20px; display:flex; align-items:center; gap:16px; }
+  .brand { font-weight:700; font-size:18px; }
+  .hwrap input[type=search] { margin-left:auto; border:1px solid #ddd; border-radius:6px; padding:6px 10px; }
+  .btn-solid { background:#7ab6f7; color:#fff; border:none; border-radius:6px; padding:8px 14px; font-size:14px; cursor:pointer; }
+  .tabs { width:940px; margin:0 auto; padding:10px 0; display:flex; gap:18px; font-size:14px; }
+  .tabs a { color:#5f6368; text-decoration:none; }
+  .tabs a.on { color:#202124; font-weight:600; }
+  main { max-width:800px; margin:24px auto; padding:0 20px; }
+  .hero h1 { font-size:26px; }
+  .hero p { color:#9aa0a6; font-size:13px; margin-top:4px; }
+  .live { display:inline-block; background:#e8f0fe; color:#1a73e8; font-size:11px; padding:2px 8px; border-radius:10px;
+          animation: pulse 1.2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+  .panel { border:1px solid #eee; border-radius:8px; padding:16px; margin-top:20px; }
+  .panel h2 { font-size:15px; margin-bottom:10px; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  td, th { text-align:left; padding:8px 6px; border-top:1px solid #f1f1f1; }
+  th { color:#9aa0a6; font-weight:500; font-size:12px; }
+  .muted { color:#9aa0a6; font-size:12px; }
+  .dot { display:inline-block; width:10px; height:10px; border-radius:50%; }
+  .dot-g { background:#34a853; } .dot-r { background:#ea4335; } .dot-y { background:#fbbc04; }
+  .rowactions { visibility:hidden; }
+  tr:hover .rowactions { visibility:visible; }
+  .iconbtn { width:18px; height:18px; border:none; background:none; cursor:pointer; font-size:12px; padding:0; }
+  .bars { display:flex; align-items:flex-end; gap:10px; height:90px; margin:10px 0; }
+  .bar { width:36px; } .b1 { background:#34a853; height:80%; } .b2 { background:#ea4335; height:55%; } .b3 { background:#fbbc04; height:30%; }
+  .legend { display:flex; gap:14px; font-size:11px; color:#9aa0a6; }
+  .sw { display:inline-block; width:9px; height:9px; margin-right:4px; }
+  form .row { margin-top:10px; }
+  form input { width:100%; border:1px solid #ddd; border-radius:6px; padding:8px 10px; font-size:13px; }
+  .err { color:#d93025; font-size:12px; margin-top:4px; }
+  .formbtns { display:flex; gap:10px; margin-top:14px; }
+  .btn-ghost { background:none; border:1px solid #ddd; border-radius:6px; padding:8px 14px; font-size:14px; cursor:pointer; color:#5f6368; }
+  .deals li { list-style:none; padding:8px 6px; border-top:1px solid #f1f1f1; font-size:13px; cursor:grab; }
+  .deals { padding:0; }
+  .modal-back { display:none; position:fixed; inset:0; background:rgba(0,0,0,.5); }
+  .modal { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:10px;
+           padding:28px; width:420px; }
+  .modal h3 { font-size:20px; } .modal p { font-size:13px; color:#5f6368; margin:10px 0 18px; }
+  .modal .tiny { font-size:10px; color:#c4c7cb; cursor:pointer; }
+</style>
+</head>
+<body>
+<header>
+  <div class="hwrap">
+    <span class="brand">RelateSphere</span>
+    <span class="live">LIVE</span>
+    <input type="search" placeholder="Search…" tabindex="3">
+    <button class="btn-solid">New Contact</button>
+    <button class="btn-solid">Import CSV</button>
+    <button class="btn-solid" tabindex="1" onclick="openUpgrade()">Upgrade Now</button>
+    <button class="iconbtn" onclick="location.href='settings.html'">⚙</button>
+  </div>
+</header>
+<nav class="tabs">
+  <a class="on" href="#">Contacts</a><a href="#">Deals</a><a href="#">Reports</a><a href="settings.html">Settings</a>
+</nav>
+<main>
+  <div class="hero">
+    <h1>Unleash Synergy With RelateSphere</h1>
+    <p>The paradigm-shifting relationship acceleration platform for tomorrow's growth architects.</p>
+  </div>
+
+  <div class="panel">
+    <h2>Contacts <span class="muted">Showing contacts 0–9 of 23</span></h2>
+    <table>
+      <tr><th></th><th>Name</th><th>Health</th><th>Stage</th><th>Last touch</th><th>Win rate</th><th></th></tr>
+      <tr>
+        <td><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='12' fill='%23ccc'/%3E%3C/svg%3E"></td>
+        <td>Dana Whitfield</td>
+        <td><span class="dot dot-g"></span></td>
+        <td>STATUS_ACTV</td>
+        <td class="muted">2026-07-24T19:03:11Z</td>
+        <td>33.333333%</td>
+        <td class="rowactions"><button class="iconbtn">✎</button><button class="iconbtn" onclick="this.closest('tr').remove()">🗑</button></td>
+      </tr>
+      <tr>
+        <td><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='12' fill='%23ccc'/%3E%3C/svg%3E"></td>
+        <td>Marcus Oyelaran</td>
+        <td><span class="dot dot-y"></span></td>
+        <td>STATUS_PNDG</td>
+        <td class="muted">2026-07-22T08:41:53Z</td>
+        <td>41.666666%</td>
+        <td class="rowactions"><button class="iconbtn">✎</button><button class="iconbtn" onclick="this.closest('tr').remove()">🗑</button></td>
+      </tr>
+      <tr>
+        <td><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='12' fill='%23ccc'/%3E%3C/svg%3E"></td>
+        <td>Priya Ramanathan</td>
+        <td><span class="dot dot-r"></span></td>
+        <td>STATUS_CHRN</td>
+        <td class="muted">2026-06-30T22:17:02Z</td>
+        <td>12.499999%</td>
+        <td class="rowactions"><button class="iconbtn">✎</button><button class="iconbtn" onclick="this.closest('tr').remove()">🗑</button></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h2>Pipeline</h2>
+    <div class="bars"><div class="bar b1"></div><div class="bar b2"></div><div class="bar b3"></div></div>
+    <div class="legend">
+      <span><span class="sw" style="background:#34a853"></span>Qualified</span>
+      <span><span class="sw" style="background:#ea4335"></span>At risk</span>
+      <span><span class="sw" style="background:#fbbc04"></span>Stalled</span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Deals</h2>
+    <p class="muted">No data.</p>
+    <ul class="deals">
+      <li draggable="true">⠿ Acme renewal — drag to reorder</li>
+      <li draggable="true">⠿ Northwind expansion — drag to reorder</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h2>Quick add</h2>
+    <form onsubmit="return addContact(event)">
+      <div class="row"><input placeholder="Full name"></div>
+      <div class="row"><input placeholder="Email" id="em1"></div>
+      <div class="row"><input placeholder="Confirm email" id="em2"></div>
+      <div class="err" id="adderr"></div>
+      <div class="formbtns">
+        <button class="btn-solid" type="submit">Add</button>
+        <button class="btn-ghost" type="button" onclick="saveDraft()">Save Draft</button>
+      </div>
+    </form>
+  </div>
+</main>
+
+<div class="modal-back" id="mb">
+  <div class="modal">
+    <h3>Go further with RelateSphere Pro</h3>
+    <p>Unlock revolutionary insight velocity and next-generation relationship intelligence.</p>
+    <button class="btn-solid">Start free trial</button>
+    <p class="tiny" onclick="document.getElementById('mb').style.display='none'">maybe later</p>
+  </div>
+</div>
+
+<script>
+  function openUpgrade(){ document.getElementById('mb').style.display = 'block'; }
+  function addContact(e){
+    e.preventDefault();
+    var em = document.getElementById('em1').value;
+    if (!/^[^@]+@[^@]+$/.test(em)) { document.getElementById('adderr').textContent = 'Invalid input.'; return false; }
+    document.getElementById('adderr').textContent = '';
+    e.target.reset();
+    return false;
+  }
+  function saveDraft(){ localStorage.setItem('draft', document.getElementById('em1').value); }
+</script>
+</body>
+</html>

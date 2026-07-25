@@ -135,7 +135,57 @@ click→visible-feedback across two screenshots. Dev-mode numbers are
 inadmissible — say "dev build, scored structurally" instead of quoting
 them.
 
-## 4. Computer-science-brain greps
+## 4. A11y sweeps (WCAG 2.2-aware)
+
+One pass per screen — targets, names, labels, focus, order:
+
+```js
+(() => {
+  const cs = el => getComputedStyle(el);
+  const tiny = [...document.querySelectorAll('button, a, input, [role=button]')]
+    .filter(b => { const r = b.getBoundingClientRect(); return r.width > 0 && (r.width < 24 || r.height < 24); })
+    .map(b => (b.textContent || b.className).trim().slice(0, 20));
+  const unnamed = [...document.querySelectorAll('button, a, [role=button]')].filter(b =>
+    !b.textContent.trim().match(/[a-z0-9]/i) && !b.getAttribute('aria-label') && !b.title).length;
+  const unlabeled = [...document.querySelectorAll('input, select, textarea')]
+    .filter(i => i.type !== 'hidden' && !(i.labels && i.labels.length) && !i.getAttribute('aria-label')).length;
+  const noAlt = [...document.querySelectorAll('img')].filter(i => !i.hasAttribute('alt')).length;
+  const posTab = document.querySelectorAll('[tabindex]:not([tabindex="0"]):not([tabindex="-1"])').length;
+  const hoverOnly = [...document.querySelectorAll('*')].filter(e =>
+    cs(e).visibility === 'hidden' && e.querySelector('button, a')).length;
+  const pasteBlocked = [...document.querySelectorAll('input')].filter(i => i.onpaste !== null).length;
+  return JSON.stringify({ targetsUnder24: tiny.length, tinySample: tiny.slice(0,5), unnamed,
+    unlabeledInputs: unlabeled, imgsNoAlt: noAlt, positiveTabindex: posTab,
+    hoverHiddenActionContainers: hoverOnly, pasteBlockedInputs: pasteBlocked }, null, 1);
+})();
+```
+
+Text-spacing override (SC 1.4.12) — inject, then screenshot and look
+for clipped/overlapping text:
+
+```js
+(() => { const s = document.createElement('style'); s.id = 'mb-spacing';
+  s.textContent = `* { line-height: 1.5 !important; letter-spacing: .12em !important;
+    word-spacing: .16em !important; } p { margin-bottom: 2em !important; }`;
+  document.head.appendChild(s); return 'spacing override on — screenshot now, then remove #mb-spacing'; })();
+```
+
+Focus-not-obscured (SC 2.4.11) — after focusing each control:
+
+```js
+(el => { const r = el.getBoundingClientRect();
+  const top = document.elementFromPoint(r.left + r.width/2, r.top + r.height/2);
+  return el.contains(top) || top === el ? 'visible' : 'obscured by ' + (top?.className || top?.tagName);
+})(document.activeElement);
+```
+
+Emulation notes: forced-colors / prefers-contrast / reduced-motion are
+DevTools-or-launch-flag emulations (`--forced-colors=active`); when the
+harness can't emulate, run the checks that don't need it and state the
+gap in coverage. Reflow = resize the viewport to 320px wide and look
+for horizontal scrolling.
+
+## 5. Computer-science-brain greps
 
 Each hit is a candidate, not a verdict — follow it to the render and
 ask: would a non-programmer read this value the way the developer
@@ -149,7 +199,7 @@ grep -rn 'JSON.stringify' --include='*.tsx' app components               # debug
 grep -rnE '"(null|undefined|NaN|true|false)"' --include='*.tsx' app components   # machine values as copy
 ```
 
-## 5. Evidence conventions
+## 6. Evidence conventions
 
 ```
 .manbun/
@@ -162,7 +212,7 @@ grep -rnE '"(null|undefined|NaN|true|false)"' --include='*.tsx' app components  
 Every finding cites its receipt filename. The gallery is publishable as
 an artifact on request.
 
-## 5. Baseline schema
+## 7. Baseline schema
 
 ```json
 {

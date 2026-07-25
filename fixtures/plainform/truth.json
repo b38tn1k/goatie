@@ -1,0 +1,18 @@
+{
+  "app": "plainform",
+  "note": "SPOILERS — do not read before auditing. This is the clean control: zero planted defects.",
+  "plantedTotal": 0,
+  "defects": [],
+  "deliberate": [
+    "one primary action per screen (New invoice)",
+    "teaching empty state with a shortcut",
+    "native <dialog>: Escape closes, focus moves in, backdrop click ignored deliberately",
+    "labels + autocomplete + inputmode on every field; errors name the field and the fix",
+    "delete → toast with Undo (no confirm dialog doing undo's job)",
+    "status chip = text + ✓ glyph, never hue alone",
+    "visible :focus-visible ring, 40px+ targets, one container width",
+    "light and dark via prefers-color-scheme, AA contrast in both",
+    "local human dates, 1-based invoice numbers, amounts to 2 decimals"
+  ],
+  "scoring": "any high-severity finding here is a false positive; judgment calls (e.g. no keyboard shortcut map) should be logged as suggestions, not defects"
+}

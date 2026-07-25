@@ -1,0 +1,33 @@
+{
+  "app": "beige-crm",
+  "note": "SPOILERS — do not read before auditing. Ground truth for scoring recall.",
+  "plantedTotal": 26,
+  "defects": [
+    {"id": "hero-marketing-copy", "tag": "blame", "where": "index.html .hero", "summary": "hero states no plain purpose — 'Unleash Synergy… paradigm-shifting relationship acceleration platform'"},
+    {"id": "three-equal-primary-ctas", "tag": "hierarchy", "where": "header .btn-solid x3", "summary": "New Contact / Import CSV / Upgrade Now all identical solid primaries"},
+    {"id": "grid-misalignment", "tag": "hierarchy", "where": "header 1100px vs .tabs 940px vs main 800px", "summary": "three container widths, three left edges"},
+    {"id": "focus-outline-suppressed", "tag": "a11y", "wcag": "2.4.7", "where": "*:focus{outline:none} both pages", "summary": "focus indicator globally removed"},
+    {"id": "primary-btn-contrast", "tag": "a11y", "wcag": "1.4.3", "where": ".btn-solid #fff on #7ab6f7", "summary": "primary button label ~2.1:1"},
+    {"id": "low-contrast-muted", "tag": "a11y", "wcag": "1.4.3", "where": ".muted #9aa0a6 on #fff at 12-13px", "summary": "meta text ~2.6:1"},
+    {"id": "unlabeled-icon-buttons", "tag": "a11y", "wcag": "4.1.2", "where": ".iconbtn ⚙ ✎ 🗑", "summary": "icon-only buttons with no accessible name"},
+    {"id": "target-size-18px", "tag": "a11y", "wcag": "2.5.8", "where": ".iconbtn 18x18", "summary": "targets below 24x24 CSS px minimum"},
+    {"id": "hover-only-actions", "tag": "a11y", "wcag": "2.1.1", "where": ".rowactions visibility:hidden until tr:hover", "summary": "row actions unreachable by keyboard (no focus-within)"},
+    {"id": "status-color-only", "tag": "a11y", "wcag": "1.4.1", "where": "Health column .dot", "summary": "health conveyed by dot hue alone, no text"},
+    {"id": "chart-hue-only", "tag": "a11y", "wcag": "1.4.1", "where": ".bars + .legend", "summary": "series distinguished only by red/green/yellow; legend swatches 9px, text 2.6:1"},
+    {"id": "placeholder-only-inputs", "tag": "a11y", "wcag": "3.3.2", "where": "Quick add form", "summary": "no labels, placeholder-only fields"},
+    {"id": "positive-tabindex", "tag": "a11y", "wcag": "2.4.3", "where": "search tabindex=3, Upgrade tabindex=1", "summary": "jumbled focus order"},
+    {"id": "image-no-alt", "tag": "a11y", "wcag": "1.1.1", "where": "avatar img x3", "summary": "images without alt"},
+    {"id": "motion-ignores-reduced", "tag": "a11y", "wcag": "2.3.3", "where": ".live pulse animation", "summary": "infinite pulse with no prefers-reduced-motion guard"},
+    {"id": "dragging-no-alternative", "tag": "a11y", "wcag": "2.5.7", "where": ".deals draggable rows", "summary": "reorder by drag only, no single-pointer/button alternative"},
+    {"id": "redundant-email-entry", "tag": "default", "wcag": "3.3.7", "where": "Email + Confirm email", "summary": "asks the same information twice"},
+    {"id": "blame-error", "tag": "blame", "where": "addContact() → 'Invalid input.'", "summary": "error names no field, no fix"},
+    {"id": "no-save-feedback", "tag": "silent", "where": "saveDraft()", "summary": "Save Draft gives zero visible feedback"},
+    {"id": "delete-no-confirm-no-undo", "tag": "trap", "where": "🗑 onclick tr.remove()", "summary": "instant permanent row delete, silent"},
+    {"id": "empty-state-no-data", "tag": "blame", "where": "Deals panel", "summary": "'No data.' teaches nothing"},
+    {"id": "modal-no-escape", "tag": "trap", "where": "#mb upgrade modal", "summary": "no Escape, no close control (10px 'maybe later' at ~1.5:1), no focus management"},
+    {"id": "dead-end-settings", "tag": "orphan", "where": "settings.html", "summary": "no nav, no back link — dead end"},
+    {"id": "zero-based-counter", "tag": "devbrain", "where": "'Showing contacts 0–9 of 23'", "summary": "zero-based range shown to users"},
+    {"id": "iso-timestamps", "tag": "devbrain", "where": "Last touch column", "summary": "raw ISO-8601 UTC strings"},
+    {"id": "raw-enums-and-precision", "tag": "devbrain", "where": "Stage column + Win rate", "summary": "STATUS_ACTV enums and 33.333333% floats rendered verbatim"}
+  ]
+}

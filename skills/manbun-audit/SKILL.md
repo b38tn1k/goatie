@@ -146,7 +146,13 @@ belongs to the implementer.
   form of "it doesn't look professional".
 
 **2c. Mode & access pass — every mode, every key screen.** A mode you
-didn't render is a mode you didn't audit.
+didn't render is a mode you didn't audit. The conformance target is
+WCAG 2.2 AA — the 2.2-specific checks, the dual-band contrast policy
+(WCAG 2.x gates, APCA advises), the full 2026 mode set (forced-colors,
+prefers-contrast, reflow at 320px, 200% zoom, text-spacing override),
+and the current legal deadlines live in `a11y.md` next to this skill.
+Read it; most 2.1-era checklists are stale (4.1.1 is gone, the ADA
+dates moved).
 
 - **Color modes.** Render light AND dark (toggle them, don't trust the
   code), then re-check the surface levels and contrast in each — themes
@@ -158,8 +164,15 @@ didn't render is a mode you didn't audit.
   chart series, link vs text, valid vs invalid — is a failure: pair
   color with a shape, label, weight, or icon.
 - **Keyboard.** Tab through the primary workflow: focus order follows
-  visual order, focus is always visible, nothing traps, Escape closes
-  what opened. Every action reachable by pointer is reachable by key.
+  visual order, focus is always visible **and never fully obscured by
+  sticky chrome** (2.4.11), nothing traps, Escape closes what opened.
+  Every action reachable by pointer is reachable by key — including
+  hover-revealed controls (`:hover` without `:focus-within` is a
+  failure) and anything drag-only (2.5.7 needs a button alternative).
+- **Targets & forms.** Hit areas ≥ 24×24 CSS px (2.5.8; bands and
+  exceptions in `a11y.md`). Multi-step flows never re-ask for entered
+  data (3.3.7). Auth flows: no paste-blocking, no `autocomplete` off
+  on credentials, no CAPTCHA without an alternative (3.3.8).
 - **Names.** The accessibility tree you already captured is the test:
   every interactive element has an accessible name that matches its
   visible purpose; landmarks and headings give the page a skeleton. An
