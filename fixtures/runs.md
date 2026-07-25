@@ -4,13 +4,11 @@
 
 | Fixture | Recall | False positives | Notes |
 |---------|--------|-----------------|-------|
-| beige-crm | **26/26 planted** | 0 | Blind subagent auditor, own tab, spoilers fenced. Also surfaced **11 unplanted-but-true defects** (fictional row count, Add never inserts, dead nav tabs, settings autosave is a lie, 940px reflow break, modal decline dark-pattern, chart with no values, telemetry opt-out default, th scope, unwired drag, dead CTAs) — the fixture contains more truth than its answer key; extras verified true by the spoiled scorer. |
-| plainform | — | pending | |
+| beige-crm | **26/26 planted** | 0 | Blind subagent, spoilers fenced. Also surfaced **11 unplanted-but-true defects** (fictional row count, Add never inserts, dead nav tabs, settings autosave lie, 940px reflow break, modal decline dark-pattern, chart with no values, telemetry default, th scope, unwired drag, dead CTAs) — extras verified true by the spoiled scorer. |
+| plainform | — | **0 fabricated** | Reported 4 defects; skeptical scoring confirmed **all 4 were real bugs in the "clean" fixture** (no aria error wiring, focus lost to body after delete, dialog pinned top-left by the * margin reset, row overflow at 320px). Fixture fixed same day; the auditor also correctly isolated 2 tool artifacts (synthetic-Escape on native dialog) as NOT app bugs by injecting a control dialog. |
+
+Net: recall 26/26, precision 100% (zero fabricated findings across both
+runs), and the benchmark's first output was fixing its own control app.
 
 Auditor-declared coverage gaps (honest): forced-colors / prefers-contrast /
-text-spacing / 200% zoom not emulatable in the harness — checks that don't
-need emulation ran instead. No dark theme exists in the fixture to test.
-
-Scoring notes: matched on substance. Auditor's root-cause clustering
-(one contrast token = findings 7/8/20/28; one icon-button decision =
-3/16/17) matched the planted intent almost exactly.
+text-spacing emulation limited in-harness; no dark theme in beige-crm.

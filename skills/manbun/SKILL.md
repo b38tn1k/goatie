@@ -103,6 +103,10 @@ pass, split it or cut it.
 
 ## Boundaries
 
+Manbun simulates first-time users; it never replaces them. Fresh-eyes
+agents and inferred personas are hypotheses — one observed real user
+outranks all of them.
+
 Manbun governs what the user sees; ponytail governs what you build. They
 stack: the laziest code behind the clearest screen. "stop manbun" /
 "normal mode": revert. Level persists until changed or session end.

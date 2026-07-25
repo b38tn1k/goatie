@@ -1,6 +1,6 @@
 {
   "app": "plainform",
-  "note": "SPOILERS — do not read before auditing. This is the clean control: zero planted defects.",
+  "note": "SPOILERS \u2014 do not read before auditing. Clean control: zero planted defects. Hardened 2026-07-24 after the first blind run found 4 real bugs here (aria error wiring, delete focus loss, dialog centering, 320px row overflow) \u2014 all fixed; the auditor was right, the fixture was wrong.",
   "plantedTotal": 0,
   "defects": [],
   "deliberate": [
@@ -8,11 +8,15 @@
     "teaching empty state with a shortcut",
     "native <dialog>: Escape closes, focus moves in, backdrop click ignored deliberately",
     "labels + autocomplete + inputmode on every field; errors name the field and the fix",
-    "delete → toast with Undo (no confirm dialog doing undo's job)",
-    "status chip = text + ✓ glyph, never hue alone",
+    "delete \u2192 toast with Undo (no confirm dialog doing undo's job)",
+    "status chip = text + \u2713 glyph, never hue alone",
     "visible :focus-visible ring, 40px+ targets, one container width",
     "light and dark via prefers-color-scheme, AA contrast in both",
-    "local human dates, 1-based invoice numbers, amounts to 2 decimals"
+    "local human dates, 1-based invoice numbers, amounts to 2 decimals",
+    "errors wired aria-describedby + aria-invalid, focus moves to first invalid field",
+    "delete moves focus to Undo; toast dismissal returns focus to New invoice",
+    "dialog margin:auto survives the * reset; rows flex-wrap at narrow widths",
+    "amount accepts and displays thousands separators"
   ],
   "scoring": "any high-severity finding here is a false positive; judgment calls (e.g. no keyboard shortcut map) should be logged as suggestions, not defects"
 }

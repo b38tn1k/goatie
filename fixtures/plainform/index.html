@@ -28,13 +28,12 @@
   .empty { text-align:center; padding:28px 18px; }
   .empty p { color:var(--ink-2); font-size:14px; margin-bottom:14px; }
   ul.invoices { list-style:none; }
-  ul.invoices li { display:flex; align-items:center; gap:12px; padding:12px 4px; border-top:1px solid var(--border); font-size:14px; }
+  ul.invoices li { display:flex; flex-wrap:wrap; align-items:center; gap:12px; padding:12px 4px; border-top:1px solid var(--border); font-size:14px; }
   ul.invoices li:first-child { border-top:none; }
-  .status { font-size:12px; padding:3px 9px; border-radius:9px; background:var(--ok-bg); color:var(--ok-ink); }
-  .status::before { content:"✓ "; }
+  .status { font-size:12px; padding:3px 9px; border-radius:9px; border:1px solid var(--border); color:var(--ink-2); }
   .due { color:var(--ink-2); font-size:13px; margin-left:auto; }
   dialog { border:1px solid var(--border); border-radius:12px; padding:22px; width:min(420px, 90vw);
-           background:var(--surface); color:var(--ink); }
+           background:var(--surface); color:var(--ink); margin:auto; }
   dialog::backdrop { background:rgba(0,0,0,.45); }
   dialog h2 { font-size:16px; margin-bottom:12px; }
   label { display:block; font-size:13px; margin-top:12px; margin-bottom:4px; }
@@ -73,10 +72,10 @@
   <h2 id="dlgtitle">New invoice</h2>
   <form method="dialog" id="form" novalidate>
     <label for="client">Client name</label>
-    <input id="client" name="client" autocomplete="organization" required>
+    <input id="client" name="client" autocomplete="organization" aria-describedby="clienterr" required>
     <p class="error" id="clienterr" hidden>Enter the client's name — it appears on the invoice.</p>
     <label for="amount">Amount</label>
-    <input id="amount" name="amount" inputmode="decimal" placeholder="0.00" required>
+    <input id="amount" name="amount" inputmode="decimal" placeholder="0.00" aria-describedby="amounterr" required>
     <p class="hint">Due 30 days from today — you can change this later.</p>
     <p class="error" id="amounterr" hidden>Enter an amount, like 1250 or 1250.50.</p>
     <div class="dlgbtns">
@@ -106,11 +105,12 @@
   function hideErrors(){ clienterr.hidden = amounterr.hidden = true; }
   form.onsubmit = (e) => {
     hideErrors();
-    const client = form.client.value.trim(), amount = form.amount.value.trim();
-    let bad = false;
-    if (!client) { clienterr.hidden = false; bad = true; }
-    if (!/^\d+(\.\d{1,2})?$/.test(amount)) { amounterr.hidden = false; bad = true; }
-    if (bad) { e.preventDefault(); return; }
+    form.client.removeAttribute('aria-invalid'); form.amount.removeAttribute('aria-invalid');
+    const client = form.client.value.trim(), amount = form.amount.value.trim().replace(/,/g, '');
+    let firstBad = null;
+    if (!client) { clienterr.hidden = false; form.client.setAttribute('aria-invalid','true'); firstBad = form.client; }
+    if (!/^\d+(\.\d{1,2})?$/.test(amount)) { amounterr.hidden = false; form.amount.setAttribute('aria-invalid','true'); firstBad = firstBad || form.amount; }
+    if (firstBad) { e.preventDefault(); firstBad.focus(); return; }
     invoices.push({ id: ++n, client, amount: Number(amount) });
     render();
     showToast(`Invoice ${n} created for ${client}.`, false);
@@ -124,7 +124,7 @@
       const li = document.createElement('li');
       const due = new Date(Date.now() + 30*864e5).toLocaleDateString(undefined, {month:'short', day:'numeric'});
       li.innerHTML = `<span>#${inv.id} · ${inv.client}</span><span class="status">Draft</span>
-        <span class="due">$${inv.amount.toFixed(2)} · due ${due}</span>
+        <span class="due">$${inv.amount.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})} · due ${due}</span>
         <button class="btn btn-quiet" data-id="${inv.id}">Delete</button>`;
       li.querySelector('button').onclick = () => del(inv.id);
       list.appendChild(li);
@@ -137,6 +137,7 @@
     invoices.splice(i, 1);
     render();
     showToast(`Deleted invoice #${id}.`, true);
+    undoBtn.focus();
   }
 
   undoBtn.onclick = () => {
@@ -150,7 +151,11 @@
     toast.style.display = 'flex';
     clearTimeout(toastTimer); toastTimer = setTimeout(hideToast, 6000);
   }
-  function hideToast(){ toast.style.display = 'none'; }
+  function hideToast(){
+    const hadFocus = toast.contains(document.activeElement);
+    toast.style.display = 'none';
+    if (hadFocus) document.getElementById('newbtn').focus();
+  }
 </script>
 </body>
 </html>

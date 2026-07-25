@@ -1,0 +1,2 @@
+description = "Personas and user stories as testable journeys (artifact-inferred or greenfield hypotheses)"
+prompt = "Run manbun-journeys for {{args}} (default: the current app). Use the manbun-journeys skill: infer personas from the artifact's routes/roles/copy when an app exists, or draft hypothesis-labeled personas from the stated context when greenfield. 3-5 max, one story each with a walkability acceptance test and an anti-scope, one page total, closing with a journeys-by-screens table /manbun-audit can walk."

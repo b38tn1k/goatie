@@ -205,6 +205,9 @@ one question per screen: would someone who has never programmed read
 every visible value the way the developer meant it? Implementation-
 shaped flows belong here too — a UI that makes the user assemble the
 data model (create a node, then link it) instead of doing their task.
+Locale readiness is this check's sibling: hardcoded date/number
+formats, concatenated sentence fragments, and layouts that can't
+mirror for RTL are the machine's locale showing through.
 
 **2f. Proximity & intent pass.** What acts on a thing lives on the
 thing, and the user's intent survives everything — full reference in

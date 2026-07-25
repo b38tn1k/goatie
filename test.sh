@@ -25,4 +25,5 @@ grep -q "2.5.8" skills/manbun-audit/a11y.md || { echo "a11y lost WCAG 2.2 checks
 grep -q "proximity:" skills/manbun-review/SKILL.md && grep -q "parity:" skills/manbun-review/SKILL.md || { echo "review lost proximity/parity tags"; exit 1; }
 node -e 'const t=JSON.parse(require("fs").readFileSync("fixtures/beige-crm/truth.json")); if(t.defects.length!==t.plantedTotal) throw new Error("beige-crm truth count mismatch")'
 node -e 'JSON.parse(require("fs").readFileSync("fixtures/plainform/truth.json"))'
+[ -s skills/manbun-journeys/SKILL.md ] && [ -s commands/manbun-journeys.toml ] || { echo "missing journeys skill"; exit 1; }
 echo "manbun OK"

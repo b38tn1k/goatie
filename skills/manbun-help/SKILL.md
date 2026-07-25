@@ -38,6 +38,8 @@ COMMANDS
   /manbun-bench        measure the audit against the planted-defect
                        fixtures: blind subagent auditors, recall +
                        false-positive scoring, logged runs
+  /manbun-journeys     personas + user stories as testable journeys
+                       (artifact-inferred, or greenfield hypotheses)
   /manbun-help         this card
 
 NEVER CUT

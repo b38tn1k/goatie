@@ -8,7 +8,7 @@
 
 <p align="center">
   <img alt="works with 1 agent" src="https://img.shields.io/badge/works%20with-1%20agent-333333">
-  <img alt="benchmarks n=you" src="https://img.shields.io/badge/benchmarks-n%3Dyou-333333">
+  <img alt="recall 26/26" src="https://img.shields.io/badge/recall-26%2F26-333333">
   <img alt="cover of ponytail" src="https://img.shields.io/badge/cover%20of-ponytail-333333">
   <img alt="MIT license" src="https://img.shields.io/badge/license-MIT-333333">
 </p>
@@ -16,10 +16,12 @@
 <p align="center"><strong>fewer clicks · fewer decisions · less confusion · measured: no</strong></p>
 
 <p align="center">
-No benchmarks. <a href="https://github.com/DietrichGebert/ponytail">Ponytail</a> measured twelve
-real tasks and published the tables; this is the cover version, so it ships the instrument
-instead — <code>/manbun-audit</code> scores <em>your</em> app against a 120-point scorecard with
-screenshots and source both in evidence. Sample size to date: <strong>n=you</strong>.
+<a href="https://github.com/DietrichGebert/ponytail">Ponytail</a> measured twelve real tasks
+and published the tables. Manbun's first blind run against its planted-defect fixtures
+(<code>fixtures/</code>): <strong>26/26 planted defects found, zero fabricated findings</strong>,
+11 unplanted-but-true bugs surfaced, and 4 real bugs caught in our own "clean" control —
+since fixed; the auditor was right, the fixture was wrong. n=1 run. The instrument ships
+in the box: <code>/manbun-audit</code>, on <em>your</em> app.
 </p>
 
 ---
