@@ -31,6 +31,8 @@ Tags:
 - `a11y:` unlabeled control, invisible focus, hue-only signal, contrast below floor, keyboard-unreachable action. Name the missing attribute or the pairing (label, icon, weight) that fixes it.
 - `orphan:` the diff removes or reroutes a screen's last inbound UI link. Page-level diffs look clean while doing this — when a diff touches links, nav, or routes, recompute inbound links for the affected screens before signing off. Name the screen stranded and the link that must exist.
 - `devbrain:` the machine's mental model leaked into the UI: zero-based numbering, raw enums/ids/timestamps, unrounded precision, jargon copy, implementation-shaped flows. Show the human rewrite.
+- `proximity:` a thing and what acts on it live apart: label far from field, error in a global banner instead of at the field, confirm button across the screen from the trigger, feedback outside the user's locus of attention. Name what moves next to what. Intent loss belongs here too — form values wiped by a validation error, a redirect that forgets where the user was going, filters lost on back.
+- `parity:` the app degrades across form factors instead of translating: features hidden on mobile with no path, hover-only affordances on touch, a stretched single column on desktop, fixed-width layouts that force panning. Name the capability lost and the rearrangement that restores it.
 
 ## Examples
 
