@@ -30,7 +30,7 @@ THE LADDER (stop at the first rung that holds)
 COMMANDS
   /manbun-review       friction review of a diff. Tags: cut / convention /
                        default / hierarchy / silent / trap / blame /
-                       a11y / orphan / devbrain
+                       a11y / orphan / devbrain / proximity / parity
   /manbun-audit        whole-app audit: 120-pt scorecard, page flow +
                        app flow, every color mode (light/dark/CVD/
                        forced-colors), WCAG 2.2 AA checks, fresh-eyes
