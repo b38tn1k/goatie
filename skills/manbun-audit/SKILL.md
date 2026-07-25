@@ -206,6 +206,36 @@ every visible value the way the developer meant it? Implementation-
 shaped flows belong here too — a UI that makes the user assemble the
 data model (create a node, then link it) instead of doing their task.
 
+**2f. Proximity & intent pass.** What acts on a thing lives on the
+thing, and the user's intent survives everything — full reference in
+`proximity.md`. Spatial half: labels nearer their own field than any
+neighbor (top-aligned on mobile), group spacing exceeds within-group
+spacing, item actions inside the item's region, errors DOM-adjacent to
+their field (banner-only = finding), trigger→confirm in the same
+quadrant, destructive never <8px from primary. Attention half:
+headings enable layer-cake scanning; front-load link/heading words;
+F/Z reasoning only on sparse pages, never dense app UIs. Intent half —
+all mechanical probes: auth deep-links return to the original URL
+(params intact), invalid submits preserve every other field, back
+restores scroll/filters (state in the URL), mid-form reload offers
+recovery. The app forgetting what the user was doing is a `proximity:`
+finding.
+
+**2g. Translation pass — form factors.** One product at every size:
+capabilities rearrange, never disappear — full reference in
+`translation.md`. Audit at 320/375/768/1024/1280 AND the stylesheet's
+own declared breakpoints ±1px: overflow, reflow, and the idiom
+switches (nav ≤5 destinations = visible tabs not hamburger; tables
+become cards/priority-columns/sticky-scroll, never a squeezed grid;
+dialogs become sheets). Thumb zone: primary CTA out of the top
+quadrant at phone widths. Scale: inputs ≥16px (never fixed via
+user-scalable=no), primaries at 44pt/48dp, hover-revealed actions have
+a touch path. Parity both directions: diff text + interactive
+inventory between 375px and 1280px (collapsed passes, absent fails);
+going UP, desktop must add density, hover, focus, side-by-side — a
+stretched phone column on a 1280px viewport is the mobile-first
+failure. Findings tag `parity:` or `proximity:`.
+
 **3. Associate & score.** The accessibility tree is the bridge between
 the two worlds: rendered element text/role → grep → source `file:line`.
 Every visual finding gets an anchor (or it isn't actionable); every

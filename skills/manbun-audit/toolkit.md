@@ -185,7 +185,61 @@ harness can't emulate, run the checks that don't need it and state the
 gap in coverage. Reflow = resize the viewport to 320px wide and look
 for horizontal scrolling.
 
-## 5. Computer-science-brain greps
+## 5. Proximity & translation instruments
+
+Label→field locality + error placement (run after triggering a
+validation error):
+
+```js
+(() => {
+  const gap = (a, b) => { const ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect();
+    return Math.round(Math.max(rb.top - ra.bottom, ra.top - rb.bottom, 0) +
+                      Math.max(rb.left - ra.right, ra.left - rb.right, 0)); };
+  const fields = [...document.querySelectorAll('input, select, textarea')].filter(i => i.type !== 'hidden');
+  const labelGaps = fields.map(f => { const l = f.labels && f.labels[0]; if (!l) return null;
+    const others = fields.filter(o => o !== f).map(o => gap(l, o));
+    return { field: f.name || f.id, own: gap(l, f), nearestOther: Math.min(...others, 9e9) };
+  }).filter(Boolean).filter(x => x.own >= x.nearestOther);   // ambiguous or wrong-way
+  const errs = [...document.querySelectorAll('[class*=err], [role=alert]')].filter(e => e.textContent.trim());
+  const errLocality = errs.map(e => { const f = fields.map(f => gap(e, f)).sort((a,b)=>a-b)[0];
+    return { text: e.textContent.trim().slice(0,20), pxToNearestField: f,
+             describedBy: fields.some(fl => (fl.getAttribute('aria-describedby')||'').includes(e.id)) }; });
+  return JSON.stringify({ ambiguousLabels: labelGaps, errors: errLocality }, null, 1);
+})();
+```
+
+Thumb zone at a phone viewport (375 wide): primary CTA's vertical
+position —
+
+```js
+(() => { const b = [...document.querySelectorAll('button, a')].find(e => /* pick the primary */ e.matches('.btn-primary, [class*=primary]'));
+  if (!b) return 'no primary found — identify manually';
+  const r = b.getBoundingClientRect(), vh = innerHeight;
+  return JSON.stringify({ centerY: Math.round(r.top + r.height/2), viewport: vh,
+    band: r.top < vh*0.25 ? 'TOP QUADRANT — flag' : r.top > vh*0.6 ? 'thumb zone' : 'mid' }); })();
+```
+
+Parity diff — run at 375px and 1280px, then compare:
+
+```js
+JSON.stringify({
+  textLen: document.body.innerText.length,
+  interactive: [...document.querySelectorAll('button, a, input, select, textarea')]
+    .filter(e => e.getBoundingClientRect().width > 0).length,
+  hiddenInteractive: [...document.querySelectorAll('button, a, input, select')]
+    .filter(e => e.getBoundingClientRect().width === 0).length,  // display:none w/o expander = parity loss
+})
+```
+
+Static greps for the class: `user-scalable=no|maximum-scale=1` in
+markup (a11y finding, not a fix); `:hover` rules toggling
+display/visibility/opacity without an `@media (hover)` guard; declared
+breakpoints (`grep -o 'max-width:[^)]*' *.css` and audit at each ±1px);
+`font-size` below 16px on inputs at mobile width (computed, not
+declared). Intent probes (auth returnUrl, form survival, back/bfcache,
+draft recovery) are walk procedures — see `proximity.md`.
+
+## 6. Computer-science-brain greps
 
 Each hit is a candidate, not a verdict — follow it to the render and
 ask: would a non-programmer read this value the way the developer
@@ -199,7 +253,7 @@ grep -rn 'JSON.stringify' --include='*.tsx' app components               # debug
 grep -rnE '"(null|undefined|NaN|true|false)"' --include='*.tsx' app components   # machine values as copy
 ```
 
-## 6. Evidence conventions
+## 7. Evidence conventions
 
 ```
 .manbun/
@@ -212,7 +266,7 @@ grep -rnE '"(null|undefined|NaN|true|false)"' --include='*.tsx' app components  
 Every finding cites its receipt filename. The gallery is publishable as
 an artifact on request.
 
-## 7. Baseline schema
+## 8. Baseline schema
 
 ```json
 {

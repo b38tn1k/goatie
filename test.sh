@@ -21,6 +21,8 @@ grep -q "computer-science-brain" skills/manbun-audit/SKILL.md || { echo "audit l
 [ -s skills/manbun-bench/SKILL.md ] && [ -s commands/manbun-bench.toml ] || { echo "missing bench skill"; exit 1; }
 [ -s skills/manbun-audit/a11y.md ] || { echo "missing a11y reference"; exit 1; }
 grep -q "2.5.8" skills/manbun-audit/a11y.md || { echo "a11y lost WCAG 2.2 checks"; exit 1; }
+[ -s skills/manbun-audit/proximity.md ] && [ -s skills/manbun-audit/translation.md ] || { echo "missing proximity/translation refs"; exit 1; }
+grep -q "proximity:" skills/manbun-review/SKILL.md && grep -q "parity:" skills/manbun-review/SKILL.md || { echo "review lost proximity/parity tags"; exit 1; }
 node -e 'const t=JSON.parse(require("fs").readFileSync("fixtures/beige-crm/truth.json")); if(t.defects.length!==t.plantedTotal) throw new Error("beige-crm truth count mismatch")'
 node -e 'JSON.parse(require("fs").readFileSync("fixtures/plainform/truth.json"))'
 echo "manbun OK"
