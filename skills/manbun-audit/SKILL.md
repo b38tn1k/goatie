@@ -222,7 +222,14 @@ all mechanical probes: auth deep-links return to the original URL
 (params intact), invalid submits preserve every other field, back
 restores scroll/filters (state in the URL), mid-form reload offers
 recovery. The app forgetting what the user was doing is a `proximity:`
-finding.
+finding. Composition is proximity at page scale: section order is a
+frequency claim (daily work above one-time setup — a page that appends
+each new feature below the last fails silently), same-task sections
+sit within a viewport of each other, and desktop width is information
+space — independent panels stacked one-per-viewport in a centered
+column on a wide screen is dispersion. Measure column ratio, page
+height in viewports, and section positions (toolkit), then phrase the
+fix directionally.
 
 **2g. Translation pass — form factors.** One product at every size:
 capabilities rearrange, never disappear — full reference in

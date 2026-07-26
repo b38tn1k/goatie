@@ -28,6 +28,32 @@ intent continuity — both testable.
 - **Feedback lands where attention is**: confirmation near the
   triggering control, not only a distant corner toast.
 
+## Page composition — proximity at page scale
+
+Element locality has a page-sized sibling, and it fails silently
+because every section looks fine in isolation:
+
+- **Section order is a frequency claim.** The top of the page is the
+  user's everyday; the bottom is install day. Label each section by
+  its real cadence (daily / weekly / once) from what it does — any
+  "once" section (setup, configuration, import) sitting above a
+  "daily" one (the working surface, the frequent action) is a
+  finding. A page ordered by when features shipped — each new panel
+  appended below the last — reads as exactly this failure.
+- **Same-task neighbors.** Two sections used in one task belong within
+  a viewport of each other, side-by-side when width allows — not
+  separated by unrelated panels the task scrolls past every time.
+- **Desktop width is information space.** N independent panels stacked
+  in one centered column on a ≥1280px viewport is dispersion: the
+  screen holds one panel's information while the user scrolls through
+  five. Independent sections earn columns (list-detail, two-column
+  grid); only sequential flows earn a single stack. Measure, don't
+  vibe: content-width ÷ viewport-width, total page height in
+  viewports, and the y-position of the most-used control (snippet in
+  `toolkit.md`) — then phrase the fix directionally ("widen to two
+  columns, float the daily work above setup"), never as a layout
+  prescription.
+
 ## Fitts costs
 
 - Distance × size: flag frequent pairs where the second target is far

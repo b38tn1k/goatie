@@ -12,3 +12,15 @@ runs), and the benchmark's first output was fixing its own control app.
 
 Auditor-declared coverage gaps (honest): forced-colors / prefers-contrast /
 text-spacing emulation limited in-harness; no dark theme in beige-crm.
+
+## 2026-07-26 · answer key expanded (field feedback)
+
+Composition/order + screen-space utilization missed in the field
+(ShadowLeague club-admin class: daily section below one-time setup,
+phone column at desktop width). Pillars encoded in proximity.md +
+toolkit; `composition-order-quick-add-buried` planted in beige-crm
+(key now 27). Run 1's auditor also missed it — retroactive recall
+**26/27**. The number got worse because the key got smarter; next run
+gates the new check. Also new: walled screens gained the static-layout-
+render rung (markup + real CSS + placeholder data, no auth needed) —
+composition findings no longer hide behind login walls.

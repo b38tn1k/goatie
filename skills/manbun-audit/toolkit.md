@@ -231,6 +231,23 @@ JSON.stringify({
 })
 ```
 
+Page composition (order + width) — run at desktop width, then label
+each section daily/weekly/once from its function and compare order:
+
+```js
+JSON.stringify({
+  viewport: [innerWidth, innerHeight],
+  contentWidthRatio: +((document.querySelector('main')||document.body).getBoundingClientRect().width / innerWidth).toFixed(2),
+  pageHeightViewports: +(document.documentElement.scrollHeight / innerHeight).toFixed(1),
+  sections: [...document.querySelectorAll('main h2, main h3, section > h2')].map(h =>
+    ({ t: h.textContent.trim().slice(0,24),
+       atViewport: +((h.getBoundingClientRect().top + scrollY) / innerHeight).toFixed(1) })),
+}, null, 1)
+```
+
+A "once" section above a "daily" one, or N independent panels stacked
+one-per-viewport in a single column at >=1280px, is the finding.
+
 Static greps for the class: `user-scalable=no|maximum-scale=1` in
 markup (a11y finding, not a fix); `:hover` rules toggling
 display/visibility/opacity without an `@media (hover)` guard; declared
