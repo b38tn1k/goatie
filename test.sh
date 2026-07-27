@@ -26,4 +26,5 @@ grep -q "proximity:" skills/manbun-review/SKILL.md && grep -q "parity:" skills/m
 node -e 'const t=JSON.parse(require("fs").readFileSync("fixtures/beige-crm/truth.json")); if(t.defects.length!==t.plantedTotal) throw new Error("beige-crm truth count mismatch")'
 node -e 'JSON.parse(require("fs").readFileSync("fixtures/plainform/truth.json"))'
 [ -s skills/manbun-journeys/SKILL.md ] && [ -s commands/manbun-journeys.toml ] || { echo "missing journeys skill"; exit 1; }
+grep -qc "GAP" skills/manbun-audit/failure-modes.md >/dev/null && grep -q "failure-modes.md" skills/manbun-audit/SKILL.md || { echo "catalog unwired"; exit 1; }
 echo "manbun OK"

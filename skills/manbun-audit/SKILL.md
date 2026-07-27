@@ -332,6 +332,14 @@ Also sweep, folding findings into the categories above: forms, tables,
 dashboards, search, filtering, empty states, accessibility, mobile
 responsiveness, keyboard usability, overall consistency.
 
+**The catalog sweep — the completeness gate.** Before writing the
+report, walk `failure-modes.md` (≈130 documented failure modes, app
+pathways down to components) top to bottom and mark every category
+checked / found / n-a. The sweep ships in the report. This exists
+because classes have been silently skipped before — a named row can be
+disputed; an unnamed absence can't. GAP-coded rows are detected
+directly from their row; cite the id (`E6`, `O4`) in the finding.
+
 ## Output
 
 1. **Coverage & calibration**: rendered %, personas walked, modes
@@ -343,10 +351,12 @@ responsiveness, keyboard usability, overall consistency.
 3. **Overall score /120** with interpretation band.
 4. **App flow**: the journey traces (screens crossed, decisions, dead
    ends) and the orphan list — screens with no inbound UI path.
-5. **Top 5 UX problems** — worst first, each with severity, the
+5. **Catalog sweep table** — every failure-modes.md category:
+   checked / found (with ids) / n-a.
+6. **Top 5 UX problems** — worst first, each with severity, the
    friction it causes, and its receipt.
-6. **Top 5 highest-value improvements** — each with estimated effort (S/M/L) and expected user impact.
-7. Every improvement phrased as the smallest change that fixes the
+7. **Top 5 highest-value improvements** — each with estimated effort (S/M/L) and expected user impact.
+8. Every improvement phrased as the smallest change that fixes the
    friction, manbun-style — directional where visual ("fatten",
    "skinny down", "raise contrast"), never a hardcoded constant.
 
