@@ -24,6 +24,7 @@ directly until a dedicated check exists.
 | A10 | No search once content outgrows nav | S | audit scorecard nav |
 | A11 | Cross-surface hardcoded links (wrong portal) | S | corpus grep |
 | A12 | Feature reachable only by memory/shortcut, no visible path | S | discoverability (notes field lesson) |
+| A13 | Nav active-state lies (highlights a section you're not in) | R | ShadowLeague field find |
 
 ## B. Journeys & tasks
 
@@ -131,6 +132,7 @@ directly until a dedicated check exists.
 | H8 | Copy/download/export with no confirmation | M | notes lesson |
 | H9 | State change lands outside viewport (no scroll/flash) | R | proximity feedback |
 | H10 | aria-live absent on dynamic status | S | a11y sweep |
+| H11 | Success message shown over a view that hasn't updated (toast contradicts stale page) | R | ShadowLeague field find |
 
 ## I. Modals & overlays
 

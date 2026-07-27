@@ -1,6 +1,6 @@
 {
   "name": "manbun",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "First-time-user mode. Judges every screen by one question: can a first-time user complete the primary job with minimal effort and no confusion?",
   "author": {
     "name": "James Carthew"
