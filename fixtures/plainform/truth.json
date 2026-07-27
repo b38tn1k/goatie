@@ -1,6 +1,6 @@
 {
   "app": "plainform",
-  "note": "SPOILERS \u2014 do not read before auditing. Clean control: zero planted defects. Hardened 2026-07-24 after the first blind run found 4 real bugs here (aria error wiring, delete focus loss, dialog centering, 320px row overflow) \u2014 all fixed; the auditor was right, the fixture was wrong.",
+  "note": "SPOILERS \u2014 do not read before auditing. Clean control: zero planted defects. Hardened 2026-07-24 after the first blind run found 4 real bugs here (aria error wiring, delete focus loss, dialog centering, 320px row overflow) \u2014 all fixed; the auditor was right, the fixture was wrong. Run 2 (2026-07-27) found 2 more real bugs (16px inputs, ambiguous Delete names) \u2014 also fixed.",
   "plantedTotal": 0,
   "defects": [],
   "deliberate": [
@@ -16,7 +16,9 @@
     "errors wired aria-describedby + aria-invalid, focus moves to first invalid field",
     "delete moves focus to Undo; toast dismissal returns focus to New invoice",
     "dialog margin:auto survives the * reset; rows flex-wrap at narrow widths",
-    "amount accepts and displays thousands separators"
+    "amount accepts and displays thousands separators",
+    "inputs 16px (no iOS zoom)",
+    "Delete buttons name their invoice (aria-label)"
   ],
   "scoring": "any high-severity finding here is a false positive; judgment calls (e.g. no keyboard shortcut map) should be logged as suggestions, not defects"
 }

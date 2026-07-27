@@ -24,3 +24,13 @@ toolkit; `composition-order-quick-add-buried` planted in beige-crm
 gates the new check. Also new: walled screens gained the static-layout-
 render rung (markup + real CSS + placeholder data, no auth needed) —
 composition findings no longer hide behind login walls.
+
+## 2026-07-27 · run 2 · skill @ 0.2.0 (catalog sweep live)
+
+| Fixture | Recall | False positives | Notes |
+|---------|--------|-----------------|-------|
+| beige-crm | **27/27** | 0 | Blind workflow auditor. The composition plant (C1) missed in run 1 was CAUGHT — the catalog sweep gate ran (per-category checked/found/n-a with row ids, verified in output). 43 total findings incl. the unplanted truths from run 1. |
+| plainform | — | **0 fabricated** | 2 findings, both real bugs again (14px dialog inputs vs our own 16px rule; Delete buttons not naming their invoice) — fixed same day. Escape automation artifact correctly isolated a second time. |
+
+Verdict: the sweep gate works — the exact class that escaped run 1
+was recovered under it. Control-app defect rate falling: 4 → 2 → (next).
