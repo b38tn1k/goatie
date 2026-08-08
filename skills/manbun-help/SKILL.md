@@ -40,6 +40,9 @@ COMMANDS
                        false-positive scoring, logged runs
   /manbun-journeys     personas + user stories as testable journeys
                        (artifact-inferred, or greenfield hypotheses)
+  /manbun-contract     synthesise or reconcile a capability contract:
+                       pillars/roles, can-refuse-invisible-open cells,
+                       feature gaps vs the ideal, open-question inbox
   /manbun-help         this card
 
 NEVER CUT

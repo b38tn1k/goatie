@@ -249,7 +249,20 @@ directly until a dedicated check exists.
 | Q5 | Font swap flash / invisible text | M | perf pass |
 | Q6 | Interaction latency >100ms with no active state | M | input delay |
 
-**~130 modes.** GAP rows are still findings — this file is their
+## R. Capability contract (when one exists — /manbun-contract)
+
+| # | Failure | Det | Owner |
+|---|---------|-----|-------|
+| R1 | broken-refusal: a refuse cell's gate missing on some path (cancelled/archived still accepts input) | M/S | contract audit |
+| R2 | dead-grant: a can cell with no route or link to reach it | S/R | contract audit |
+| R3 | reachable-invisible: an invisible cell reachable by URL guess, token, or neighbouring role | M | contract audit |
+| R4 | promise-unmet: pillar's one-sentence promise not kept by what ships | F | contract audit |
+| R5 | contract-wrong: the written claim lies about today's code — first-class, equal to a code defect | S | contract audit |
+| R6 | silent-policy: code picked a policy nobody chose (an open cell that was never opened) | S | contract synthesis |
+| R7 | pillar silent on a role (matrix hole) / route neither audited nor excluded in writing | S | honesty invariants |
+| R8 | dead-end button: action offered where it will only be refused | R | contract audit |
+
+**~140 modes.** GAP rows are still findings — this file is their
 detection method until a dedicated check exists; cite the row id
 (e.g. `E6`, `O4`) in the finding. New GAPs discovered in the field get
 a row here THE SAME DAY, and a plant in the fixtures when practical.

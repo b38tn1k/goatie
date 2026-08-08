@@ -27,4 +27,7 @@ node -e 'const t=JSON.parse(require("fs").readFileSync("fixtures/beige-crm/truth
 node -e 'JSON.parse(require("fs").readFileSync("fixtures/plainform/truth.json"))'
 [ -s skills/manbun-journeys/SKILL.md ] && [ -s commands/manbun-journeys.toml ] || { echo "missing journeys skill"; exit 1; }
 grep -qc "GAP" skills/manbun-audit/failure-modes.md >/dev/null && grep -q "failure-modes.md" skills/manbun-audit/SKILL.md || { echo "catalog unwired"; exit 1; }
+[ -s skills/manbun-contract/SKILL.md ] && [ -s skills/manbun-contract/capability-contract.md ] && [ -s commands/manbun-contract.toml ] || { echo "missing contract skill"; exit 1; }
+grep -q "R. Capability contract" skills/manbun-audit/failure-modes.md || { echo "catalog lost section R"; exit 1; }
+grep -q "capability-contract" skills/manbun-audit/SKILL.md || { echo "audit lost contract hook"; exit 1; }
 echo "manbun OK"

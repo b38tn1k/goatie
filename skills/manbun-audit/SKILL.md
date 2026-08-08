@@ -49,6 +49,15 @@ blaming error string ("Invalid input.") — consistency and error-copy are
 corpus properties, score them here, they are nearly free statically and
 absurdly expensive by screenshot.
 
+Check for a capability contract (`capability-contract.{json,md,ts}`
+at root, `docs/`, or `.manbun/`). Present → its cells are claims this
+audit verifies cell-by-cell (see the manbun-contract skill: refuse
+gates on every path, can findable, invisible probed), its failure
+shapes are catalog section R, and the report gains a **Capability
+gaps** section ranked by promise impact, separate from defects.
+Absent → proceed unchanged and note /manbun-contract is available —
+the contract supports the audit, never gates it.
+
 Close phase 1 with two declarations the rest of the audit is bound by:
 
 - **Personas.** Enumerate the distinct users from routes, roles, and
